@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import { Button, Navbar } from "flowbite-react";
 import { BsArrowRightShort } from "react-icons/bs";
-const HomeHeader = ({DarkThemeToggle}) => {
+import { IoMdPerson } from "react-icons/io";
+
+const Header = () => {
   return (
-    <div>
+    <div className='border-b'>
       <Navbar>
         <Navbar.Brand >
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            ContentGen
-          </span>
+            <input type="text"  className='rounded-lg text-black' placeholder='Search...'/>
         </Navbar.Brand>
 
         <div className="flex md:order-2">
@@ -17,13 +17,13 @@ const HomeHeader = ({DarkThemeToggle}) => {
             gradientDuoTone="pinkToOrange"
             className="content-center text-xl "
           >
-            Get started <BsArrowRightShort className="text-xl" />
+            <IoMdPerson />
           </Button>
-          <div className="md:ml-5">{DarkThemeToggle}</div>
+          <div className="md:ml-5"></div>
         </div>
       </Navbar>
     </div>
-  );
-};
+  )
+}
 
-export default HomeHeader;
+export default Header
