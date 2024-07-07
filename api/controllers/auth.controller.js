@@ -19,7 +19,7 @@ export const signup = async (req, res, next) => {
         try {
             await newUser.save();
             // remove password
-            const {password, ...others} = newUser._doc;
+            const { password, ...others } = newUser._doc;
             res.status(201).json({
                 success: true,
                 user: others,
@@ -31,5 +31,35 @@ export const signup = async (req, res, next) => {
                 message: err.message,
             });
         }
+    }
+}
+
+export const signin = async (req, res, next) => {
+    const { email, password } = req.body;
+    try{
+        const validUser = await User.findOne({email});
+        if(!validUser){
+            return res.status(200).json({
+                success: false,
+                message: "user not found",
+            });
+        }else{
+            const validPassword = bcryptjs.compareSync(password, validUser.password);
+            if(!validPassword){
+                return res.status(200).json({
+                    success: false,
+                    message: "invalid password",
+                });
+            }else{
+                const { password, ...others } = validUser._doc;
+                res.status(200).json({
+                    success: true,
+                    user: others,
+                    message: 'user logged in successfully',
+                });
+            }
+        }
+    }catch(err){
+        console.log(err);
     }
 }
