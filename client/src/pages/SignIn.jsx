@@ -1,35 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { FaGoogle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import apiClient from "../axios/axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [loading, setLoading] = useState((state) => state.user);
+  const { loading, error } = useSelector((state) => state.user);
+
+  
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     // toast.error("Please enter email and password");
     if (email && password) {
       const isValidEmail = /\S+@\S+\.\S+/.test(email);
       if (!isValidEmail) {
-        toast.error("Invalid email address");
+        dispatch(signInFailure("Invalid email address"));
+        // toast.error("Invalid email address");
       } else {
         const login = async () => {
+          dispatch(signInStart());
           apiClient
             .post("/auth/signin", {
               email,
               password,
             })
             .then((res) => {
-              res.data.success
-                ? toast.success(res.data.message)
-                : toast.error(res.data.message);
-              console.log(res);
+              if (res.data.success) {
+                dispatch(signInSuccess(res.data));
+                navigate("/dashboard/content");
+                // toast.success(res.data.message);
+                return;
+              }
+              dispatch(signInFailure(res.data.message));
+              // toast.error(res.data.message);
+              // console.log(res);
             })
             .catch((err) => {
-              console.log(err);
+              dispatch(signInFailure(err.message));
+              // console.log(err);
             });
         };
         login();
@@ -43,7 +76,7 @@ const SignIn = () => {
     <div className="h-screen flex items-center justify-center">
       {
         <form
-          onSubmit={handleSubmit}
+          onSubmit={(e) => handleSubmit(e)}
           className="flex max-w-md flex-col gap-4 shadow-lg p-5 border rounded-lg w-[500px]"
         >
           <div>
@@ -82,9 +115,10 @@ const SignIn = () => {
           </div>
           <button
             type="submit"
-            className="bg-fuchsia-700 hover:bg-fuchsia-800 text-white rounded-lg p-3"
+            className="bg-fuchsia-700 hover:bg-fuchsia-800 text-white rounded-lg p-3 disabled:bg-fuchsia-500"
+            disabled={loading}
           >
-            Sign in
+            {loading ? "Loading..." : "Sign in"}
           </button>
           <div className="text-center">or</div>
           <div className="grid grid-cols-2 gap-5">

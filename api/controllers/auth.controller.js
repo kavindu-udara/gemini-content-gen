@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 
@@ -51,8 +52,11 @@ export const signin = async (req, res, next) => {
                     message: "invalid password",
                 });
             }else{
+                const token = jwt.sign({
+                    id: validUser._id,
+                }, process.env.JWT_SECRET);
                 const { password, ...others } = validUser._doc;
-                res.status(200).json({
+                res.cookie('access_token', token, { httpOnly: true }).status(200).json({
                     success: true,
                     user: others,
                     message: 'user logged in successfully',
