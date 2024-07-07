@@ -28,9 +28,6 @@ const GenerateContent = () => {
 
   return (
     <>
-    <div className="mt-3 ml-5">
-    <button className="bg-fuchsia-700 rounded-lg text-white p-3">back</button>
-    </div>
     <div className="flex flex-row gap-10  mx-5 my-5">
       <div className="basis-1/3 rounded-xl shadow-lg border  p-5">
         <FcStart className="text-3xl mb-5" />
@@ -65,7 +62,7 @@ const GenerateContent = () => {
         <Clipboard valueToCopy="npm install flowbite-react" label="Copy" />
       </div>
       </div>
-        <div id="editor" style={{ height: '400px' }}></div>
+        <div className="rounded-lg h-96" id="editor"></div>
       </div>
     </div>
     </>

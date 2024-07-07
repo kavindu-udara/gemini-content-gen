@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
+import geminiRouter from "./routes/gemini.route.js";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.listen(3000, () => {
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/gemini', geminiRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

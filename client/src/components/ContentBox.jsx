@@ -12,6 +12,7 @@ const ContentBox = ({ContentList}) => {
               image={content.image}
               title={content.title}
               description={content.description}
+              path={'/dashboard/blog'}
             />
           );
         })}

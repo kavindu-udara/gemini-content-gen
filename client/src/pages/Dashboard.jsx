@@ -3,6 +3,7 @@ import Navigation from "../components/Navigation";
 import { Route, Routes } from "react-router-dom";
 import ContentBox from "../components/ContentBox";
 import Profile from "../components/Profile";
+import GenerateContent from "../components/GenerateContent";
 
 const Dashboard = () => {
   const ContentList = [
@@ -125,7 +126,11 @@ const Dashboard = () => {
     <>
       <Routes>
         <Route element={<Navigation />}>
-          <Route path="/content" element={<ContentBox ContentList={ContentList} />} />
+          <Route
+            path="/content"
+            element={<ContentBox ContentList={ContentList} />}
+          />
+          <Route path="/blog" element={<GenerateContent />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
