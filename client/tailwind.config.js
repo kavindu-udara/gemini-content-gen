@@ -8,7 +8,17 @@ export default {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      utilities: {
+        '.hide-scrollbar': {
+          '::-webkit-scrollbar': {
+            display: 'none',
+          },
+          '-ms-overflow-style': 'none',  // IE and Edge
+          'scrollbar-width': 'none',  // Firefox
+        },
+      },
+    },
   },
   plugins: [
     flowbite.plugin(),],
