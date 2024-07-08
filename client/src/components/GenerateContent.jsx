@@ -16,6 +16,7 @@ const GenerateContent = () => {
       setResponse("Please wait...");
       apiClient
         .post("/gemini/generate/test", {
+          withCredentials: true,
           reqPrompt: promt,
         })
         .then((res) => {

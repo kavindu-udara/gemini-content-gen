@@ -1,6 +1,7 @@
 import express from "express";
 import cors from 'cors';
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import geminiRouter from "./routes/gemini.route.js";
@@ -17,9 +18,17 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
 const app = express();
 
-app.use(cors());
+// Set up CORS options
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.listen(3000, () => {
     console.log("Listening on port 3000");
