@@ -11,6 +11,7 @@ const Dashboard = () => {
 
   const getContentList = async() => {
     apiClient.get("/content").then((res) => {
+      // setContentList(null);
       setContentList(res.data.content);
     }).catch((err) => {
       console.log(err);
@@ -25,6 +26,7 @@ const Dashboard = () => {
     <>
       <Routes>
         <Route element={<Navigation />}>
+
           <Route
             path="/content"
             element={<ContentBox ContentList={contentList} />}

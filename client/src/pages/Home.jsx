@@ -12,7 +12,9 @@ const Home = ({DarkThemeToggle}) => {
     <div className="bg-white h-screen dark:bg-gray-800">
       <HomeHeader DarkThemeToggle={DarkThemeToggle} />
       <div className="flex flex-col text-center min-h-[50vh] py-10 dark:bg-gray-800 dark:text-white items-center justify-center">
-        <div className="text-5xl font-bold">AI Content Generator</div>
+        <div className="text-5xl font-bold">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">AI Content Generator</span>
+        </div>
         <div className="text-xl mt-5 text-gray-400">
           Powered by Google Gemini
         </div>

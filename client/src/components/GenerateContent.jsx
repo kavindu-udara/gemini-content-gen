@@ -6,6 +6,7 @@ import Markdown from "react-markdown";
 import { createRoot } from "react-dom/client";
 import { HiHome } from "react-icons/hi";
 import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
 
 const GenerateContent = ({title, description, inputText, type}) => {
   const [promt, setPromt] = useState("");
@@ -62,12 +63,14 @@ const GenerateContent = ({title, description, inputText, type}) => {
   return (
     <>
       <div className="overflow-y-auto h-full py-10 scroll-smooth mb-10">
+        <NavLink to={'/dashboard/content'}>
         <Breadcrumb aria-label="Default breadcrumb example" className="mx-5">
           <Breadcrumb.Item href="#" icon={HiHome}>
             Home
           </Breadcrumb.Item>
           <Breadcrumb.Item href="#">{title}</Breadcrumb.Item>
         </Breadcrumb>
+        </NavLink>
         <div className="flex flex-col gap-10  mx-5 my-5">
           <div className="basis-1/3 rounded-xl shadow-lg border  p-5">
             <div className="text-3xl text-fuchsia-600 mb-5">{title}</div>
@@ -79,7 +82,7 @@ const GenerateContent = ({title, description, inputText, type}) => {
             </div>
             <input
               type="text"
-              className="rounded-lg border border-gray-500 w-full text-lg"
+              className="rounded-lg border border-gray-500 w-full text-lg dark:bg-gray-800"
               onChange={(e) => setPromt(e.target.value)}
               value={promt}
             />

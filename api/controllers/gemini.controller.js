@@ -59,10 +59,16 @@ export const generate = async (req, res) => {
 
     const result = await model.generateContent(generatePromt);
     const response = result.response;
-    console.log(response);
+    console.log(response.usageMetadata.totalTokenCount);
     // res.status(200).json({ success: true, response: result.candidates[0].content.parts, message: "success" });
 
 
     res.status(200).json({ success: true, response: result.response.text(), message: "success" });
+
+    // usageMetadata: {
+    //     promptTokenCount: 15,
+    //     candidatesTokenCount: 1114,
+    //     totalTokenCount: 1129
+    //   },
 
 }

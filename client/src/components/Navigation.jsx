@@ -14,122 +14,6 @@ import ContentBox from "./ContentBox";
 import Profile from "./Profile";
 
 const Navigation = () => {
-  const ContentList = [
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvNlV9q8tRA_5agW4ZtOY-EcrBP3ftuhcYoA&s",
-      title: "Meaningful alt",
-      description: "alt text for an image that is not purely decorative",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvNlV9q8tRA_5agW4ZtOY-EcrBP3ftuhcYoA&s",
-      title: "Meaningful alt",
-      description: "alt text for an image that is not purely decorative",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvNlV9q8tRA_5agW4ZtOY-EcrBP3ftuhcYoA&s",
-      title: "Meaningful alt",
-      description: "alt text for an image that is not purely decorative",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvNlV9q8tRA_5agW4ZtOY-EcrBP3ftuhcYoA&s",
-      title: "Meaningful alt",
-      description: "alt text for an image that is not purely decorative",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-  ];
 
   return (
     <div className="flex flex-row fixed top-0 left-0 w-full h-full dark:bg-gray-800 dark:text-white ">
@@ -151,7 +35,7 @@ const Navigation = () => {
             <Progress progress={50} color="blue" />
             <div className="mt-3">0/10000 Used</div>
           </div>
-          <div className="bg-slate-50 rounded-lg mt-10 text-lg text-center py-3 font-semibold items-center hover:bg-slate-100 cursor-pointer">
+          <div className="bg-slate-50 rounded-lg mt-10 text-lg text-center py-3 font-semibold items-center hover:bg-slate-100 cursor-pointer dark:bg-gray-800">
             <div className="mb-3">Upgrade</div>
           </div>
           <div className="text-xs text-gray-400 mt-10">v1.0.0</div>
@@ -161,7 +45,6 @@ const Navigation = () => {
       <div className="basis-5/6 ">
       <Header/>
         <Outlet/>
-        {/* <GenerateContent/> */}
       </div>
     </div>
   );
