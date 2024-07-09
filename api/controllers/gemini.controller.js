@@ -13,7 +13,7 @@ export const test = async (req, res) => {
     // const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
     // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = `generate blog  topic ideas for this schenario ' ${reqPrompt} '`;
+    const prompt = `generate programming code for this schenario ' ${reqPrompt} '`;
     // const prompt = "Write a story about a magic backpack.";
 
 

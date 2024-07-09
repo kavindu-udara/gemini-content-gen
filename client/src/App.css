@@ -1,0 +1,38 @@
+/* Basic styling for code elements */
+code { /* Light background color */
+    color: #c7254e; /* Text color */
+    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+    padding: 0.2em 0.4em; /* Padding around the code */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 0.9em; /* Slightly smaller font size */
+  }
+  
+  /* Styling for code blocks */
+  pre {
+    background-color: #2d2d2d; /* Dark background color */
+    color: #f8f8f2; /* Light text color */
+    padding: 1em; /* Padding around the code block */
+    border-radius: 4px; /* Rounded corners */
+    overflow-x: auto; /* Horizontal scroll for long lines */
+    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+    font-size: 0.9em; /* Slightly smaller font size */
+    line-height: 1.5; /* Line height for readability */
+  }
+  
+  /* Optional: Highlighting specific code elements */
+  pre code {
+    color: #f8f8f2; /* Default text color */
+  }
+  
+  pre code .keyword {
+    color: #f92672; /* Keyword color */
+  }
+  
+  pre code .string {
+    color: #a6e22e; /* String color */
+  }
+  
+  pre code .comment {
+    color: #75715e; /* Comment color */
+  }
+  
