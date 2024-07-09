@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FcStart } from "react-icons/fc";
 import { Button, Spinner, Clipboard, Breadcrumb } from "flowbite-react";
 import apiClient from "../axios/axios";
 import Markdown from "react-markdown";
@@ -8,25 +7,23 @@ import { HiHome } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 
-const GenerateContent = ({title, description, inputText, type}) => {
+const GenerateContent = ({ title, description, inputText, type }) => {
   const [promt, setPromt] = useState("");
   const [response, setResponse] = useState("hello");
   const [loading, setLoading] = useState(false);
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  
   useEffect(() => {
     if (error) {
       toast.error(error);
-      setError('');
+      setError("");
     }
   }, [error]);
 
   const Generate = () => {
     if (promt === "") {
-      // alert("Enter blog information");
-      setError('Enter information');
+      setError("Enter information");
     } else {
       setLoading(true);
       setResponse("Please wait...");
@@ -48,7 +45,7 @@ const GenerateContent = ({title, description, inputText, type}) => {
   };
 
   useEffect(() => {
-    setResponse("Response will be displayed here...");
+    setResponse("Result will be displayed here...");
   }, []);
 
   useEffect(() => {
@@ -63,23 +60,19 @@ const GenerateContent = ({title, description, inputText, type}) => {
   return (
     <>
       <div className="overflow-y-auto h-full py-10 scroll-smooth mb-10">
-        <NavLink to={'/dashboard/content'}>
-        <Breadcrumb aria-label="Default breadcrumb example" className="mx-5">
-          <Breadcrumb.Item href="#" icon={HiHome}>
-            Home
-          </Breadcrumb.Item>
-          <Breadcrumb.Item href="#">{title}</Breadcrumb.Item>
-        </Breadcrumb>
+        <NavLink to={"/dashboard/content"}>
+          <Breadcrumb aria-label="Default breadcrumb example" className="mx-5">
+            <Breadcrumb.Item href="#" icon={HiHome}>
+              Home
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="#">{title}</Breadcrumb.Item>
+          </Breadcrumb>
         </NavLink>
         <div className="flex flex-col gap-10  mx-5 my-5">
           <div className="basis-1/3 rounded-xl shadow-lg border  p-5">
             <div className="text-3xl text-fuchsia-600 mb-5">{title}</div>
-            <div className="text-gray-400 mb-5 text-lg">
-              {description}
-            </div>
-            <div className="mb-3 font-semibold text-lg">
-            {inputText}
-            </div>
+            <div className="text-gray-400 mb-5 text-lg">{description}</div>
+            <div className="mb-3 font-semibold text-lg">{inputText}</div>
             <input
               type="text"
               className="rounded-lg border border-gray-500 w-full text-lg dark:bg-gray-800"

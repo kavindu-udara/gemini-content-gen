@@ -7,6 +7,7 @@ import { MdDevices } from "react-icons/md";
 import { LuSettings2 } from "react-icons/lu";
 import { FaUsers } from "react-icons/fa6";
 import { FaRegComments } from "react-icons/fa6";
+import { NavLink } from "react-router-dom";
 const Home = ({DarkThemeToggle}) => {
   return (
     <div className="bg-white h-screen dark:bg-gray-800">
@@ -23,7 +24,8 @@ const Home = ({DarkThemeToggle}) => {
           gradientDuoTone="pinkToOrange"
           className="content-center text-xl mt-5 font-semibold"
         >
-          Get started <BsArrowRightShort className="text-2xl" />
+          <NavLink to='/dashboard/content'>Get started</NavLink>
+           <BsArrowRightShort className="text-2xl" />
         </Button>
       </div>
       <div className="grid sm:grid-cols-4 gap-5 mx-5 bg-white dark:bg-gray-800 grid-cols-2 pb-5">

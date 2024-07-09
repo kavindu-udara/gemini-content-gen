@@ -10,11 +10,8 @@ import ContentTile from "./ContentTile";
 import { Progress } from "flowbite-react";
 import GenerateContent from "./GenerateContent";
 import { Outlet, Route, Routes } from "react-router-dom";
-import ContentBox from "./ContentBox";
-import Profile from "./Profile";
 
 const Navigation = () => {
-
   return (
     <div className="flex flex-row fixed top-0 left-0 w-full h-full dark:bg-gray-800 dark:text-white ">
       <div className="basis-1/6 flex flex-col justify-between text-center border-r bg-white dark:border-none px-5  dark:bg-gray-700 dark:text-white ">
@@ -23,8 +20,16 @@ const Navigation = () => {
             ContentGen
           </div>
           <div className="grid grid-cols-1 gap-5 mt-3">
-          <NavButton icon={<IoIosHome />} text="Home" path={'/dashboard/content'} />
-          <NavButton icon={<FaHistory />} text="Profile" path={'/dashboard/profile'} />
+            <NavButton
+              icon={<IoIosHome />}
+              text="Home"
+              path={"/dashboard/content"}
+            />
+            <NavButton
+              icon={<FaHistory />}
+              text="Profile"
+              path={"/dashboard/profile"}
+            />
             {/* <NavButton icon={<IoIosFiling />} text="Billing" />
             <NavButton icon={<FaHistory />} text="History" /> */}
           </div>
@@ -43,8 +48,8 @@ const Navigation = () => {
       </div>
 
       <div className="basis-5/6 ">
-      <Header/>
-        <Outlet/>
+        <Header />
+        <Outlet />
       </div>
     </div>
   );
