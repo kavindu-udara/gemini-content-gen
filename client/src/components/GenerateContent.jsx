@@ -5,15 +5,27 @@ import apiClient from "../axios/axios";
 import Markdown from "react-markdown";
 import { createRoot } from "react-dom/client";
 import { HiHome } from "react-icons/hi";
+import { toast } from "react-toastify";
 
 const GenerateContent = ({title, description, inputText, type}) => {
   const [promt, setPromt] = useState("");
   const [response, setResponse] = useState("hello");
   const [loading, setLoading] = useState(false);
 
+  const [error, setError] = useState('');
+
+  
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      setError('');
+    }
+  }, [error]);
+
   const Generate = () => {
     if (promt === "") {
-      alert("Enter blog information");
+      // alert("Enter blog information");
+      setError('Enter information');
     } else {
       setLoading(true);
       setResponse("Please wait...");
@@ -74,7 +86,7 @@ const GenerateContent = ({title, description, inputText, type}) => {
             <button
               onClick={() => Generate()}
               disabled={loading}
-              className="rounded-lg bg-fuchsia-600 disabled:bg-fuchsia-400 text-white py-3 mt-5 w-full text-lg"
+              className="rounded-lg bg-fuchsia-600 disabled:bg-fuchsia-400 text-white py-3 px-5 mt-5 text-lg text-left"
             >
               <span className="pl-3">
                 {loading ? (
