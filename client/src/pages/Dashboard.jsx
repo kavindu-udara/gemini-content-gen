@@ -8,118 +8,34 @@ import GenerateContent from "../components/GenerateContent";
 const Dashboard = () => {
   const ContentList = [
     {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvNlV9q8tRA_5agW4ZtOY-EcrBP3ftuhcYoA&s",
-      title: "Meaningful alt",
-      description: "alt text for an image that is not purely decorative",
+      title: "Generate Blog Content",
+      description: "A tool that generate blog content",
+      inputText: "Describe the content you want to generate",
+      type: "blog",
     },
     {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
+      title: "Generate Code Content",
+      description: "A tool that generate code content",
+      inputText: "Describe the content you want to generate",
+      type: "code",
     },
     {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
+      title: "Generate Story Content",
+      description: "A tool that generate story content",
+      inputText: "Describe the content you want to generate",
+      type: "story",
     },
     {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
+      title: "Generate YouTube Description",
+      description: "A tool that generate youtube description",
+      inputText: "Describe the content you want to generate",
+      type: "youtube-description",
     },
     {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvNlV9q8tRA_5agW4ZtOY-EcrBP3ftuhcYoA&s",
-      title: "Meaningful alt",
-      description: "alt text for an image that is not purely decorative",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvNlV9q8tRA_5agW4ZtOY-EcrBP3ftuhcYoA&s",
-      title: "Meaningful alt",
-      description: "alt text for an image that is not purely decorative",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvNlV9q8tRA_5agW4ZtOY-EcrBP3ftuhcYoA&s",
-      title: "Meaningful alt",
-      description: "alt text for an image that is not purely decorative",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkBpgSGwIv6HLq46xw3YNe-ylvsSxTCkeviA&s",
-      title: "Blog Title",
-      description: "An AI tool that generate blog title depend on your input",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt6dERq1DrjKHNxKURrBlowGO0PO44WQ8YHA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLsEcsraB8Yh5vD5Us3MSDIpS2XE5hs8XNKA&s",
-      title: "AI Content Generator",
-      description: "Powered by Google Gemini",
+      title: "Generate Podcast Content",
+      description: "A tool that generate podcast content",
+      inputText: "Describe the podcast title you want to generate",
+      type: "podcast",
     },
   ];
   return (
@@ -130,11 +46,66 @@ const Dashboard = () => {
             path="/content"
             element={<ContentBox ContentList={ContentList} />}
           />
-          <Route path="/blog" element={<GenerateContent  title={'Generate Blog Content'} description={'A tool that generate blog content'} inputText={'Describe the content you want to generate'} type={'blog'} />} />
-          <Route path="/code" element={<GenerateContent  title={'Generate Code Content'} description={'A tool that generate code content'} inputText={'Describe the content you want to generate'} type={'code'} />} />
-          <Route path="/story" element={<GenerateContent  title={'Generate Story Content'} description={'A tool that generate story content'} inputText={'Describe the content you want to generate'} type={'story'} />} />
-          <Route path="/youtube-description" element={<GenerateContent  title={'Generate YouTube Description'} description={'A tool that generate youtube description'} inputText={'Describe the content you want to generate'} type={'youtube-description'} />} />
-          <Route path="/podcast" element={<GenerateContent  title={'Generate Podcast Content'} description={'A tool that generate podcast content'} inputText={'Describe the podcast title you want to generate'} type={'podcast'} />} />
+
+          <Route
+            path="/blog"
+            element={
+              <GenerateContent
+                title={"Generate Blog Content"}
+                description={"A tool that generate blog content"}
+                inputText={"Describe the content you want to generate"}
+                type={"blog"}
+              />
+            }
+          />
+
+          <Route
+            path="/code"
+            element={
+              <GenerateContent
+                title={"Generate Code Content"}
+                description={"A tool that generate code content"}
+                inputText={"Describe the content you want to generate"}
+                type={"code"}
+              />
+            }
+          />
+
+          <Route
+            path="/story"
+            element={
+              <GenerateContent
+                title={"Generate Story Content"}
+                description={"A tool that generate story content"}
+                inputText={"Describe the content you want to generate"}
+                type={"story"}
+              />
+            }
+          />
+
+          <Route
+            path="/youtube-description"
+            element={
+              <GenerateContent
+                title={"Generate YouTube Description"}
+                description={"A tool that generate youtube description"}
+                inputText={"Describe the content you want to generate"}
+                type={"youtube-description"}
+              />
+            }
+          />
+
+          <Route
+            path="/podcast"
+            element={
+              <GenerateContent
+                title={"Generate Podcast Content"}
+                description={"A tool that generate podcast content"}
+                inputText={"Describe the podcast title you want to generate"}
+                type={"podcast"}
+              />
+            }
+          />
 
           <Route path="/profile" element={<Profile />} />
         </Route>
