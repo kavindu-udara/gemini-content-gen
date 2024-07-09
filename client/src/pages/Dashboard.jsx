@@ -130,7 +130,7 @@ const Dashboard = () => {
             path="/content"
             element={<ContentBox ContentList={ContentList} />}
           />
-          <Route path="/blog" element={<GenerateContent />} />
+          <Route path="/blog" element={<GenerateContent  title={'Title'} description={'Description'} inputText={'Enter Text'} type={'test'} />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
