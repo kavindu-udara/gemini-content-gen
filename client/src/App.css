@@ -12,7 +12,7 @@ code { /* Light background color */
     background-color: #2d2d2d; /* Dark background color */
     color: #f8f8f2; /* Light text color */
     padding: 1em; /* Padding around the code block */
-    border-radius: 4px; /* Rounded corners */
+    border-radius: 10px; /* Rounded corners */
     overflow-x: auto; /* Horizontal scroll for long lines */
     font-family: 'Courier New', Courier, monospace; /* Monospace font */
     font-size: 0.9em; /* Slightly smaller font size */
@@ -34,5 +34,20 @@ code { /* Light background color */
   
   pre code .comment {
     color: #75715e; /* Comment color */
+  }
+
+  ul{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  ul li {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  p{
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   

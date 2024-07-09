@@ -10,11 +10,13 @@ import { createRoot } from "react-dom/client";
 const GenerateContent = () => {
   const [promt, setPromt] = useState("");
   const [response, setResponse] = useState("hello");
+  const [loading, setLoading] = useState(false);
 
-  const GenerateContent = () => {
+  const Generate = () => {
     if (promt === "") {
       alert("Enter blog information");
     } else {
+      setLoading(true);
       setResponse("Please wait...");
       apiClient
         .post("/gemini/generate/test", {
@@ -24,12 +26,18 @@ const GenerateContent = () => {
         .then((res) => {
           setResponse(res.data.response);
           console.log(res.data);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err.message);
+          setLoading(false);
         });
     }
   };
+
+  useEffect(() => {
+    setResponse("Response will be displayed here...");
+  }, []);
 
   useEffect(() => {
     const markdown = response;
@@ -38,13 +46,12 @@ const GenerateContent = () => {
     );
   }, [response]);
 
-  const codeStyles = {
-  };
+  const codeStyles = {};
 
   return (
     <>
-      <div className="overflow-y-auto h-full py-10 scroll-smooth">
-        <div className="flex flex-row gap-10  mx-5 my-5">
+      <div className="overflow-y-auto h-full py-10 scroll-smooth mb-10">
+        <div className="flex flex-col gap-10  mx-5 my-5">
           <div className="basis-1/3 rounded-xl shadow-lg border  p-5">
             <FcStart className="text-3xl mb-5" />
             <div className="text-2xl text-fuchsia-600 mb-5">Blog Title</div>
@@ -63,17 +70,26 @@ const GenerateContent = () => {
               Enter your blog information
             </div>
             {/* <textarea
-          rows="10"
-          name=""
-          id=""
-          className="rounded-lg border border-gray-500 w-full"
-        ></textarea> */}
+              rows="10"
+              name=""
+              id=""
+              className="rounded-lg border border-gray-500 w-full"
+            ></textarea> */}
             <button
-              onClick={() => GenerateContent()}
-              className="rounded-lg bg-fuchsia-700 disabled:bg-fuchsia-400 text-white py-3 mt-5 w-full"
+              onClick={() => Generate()}
+              disabled={loading}
+              className="rounded-lg bg-fuchsia-600 disabled:bg-fuchsia-400 text-white py-3 mt-5 w-full"
             >
-              <Spinner aria-label="Spinner button example" size="sm" />
-              <span className="pl-3">Generating...</span>
+              <span className="pl-3">
+                {loading ? (
+                  <span>
+                    <Spinner aria-label="Spinner button example" size="sm" />{" "}
+                    Generating...
+                  </span>
+                ) : (
+                  "Generate"
+                )}
+              </span>
             </button>
           </div>
           <div className="basis-2/3 rounded-xl shadow-lg p-5 border">
@@ -83,7 +99,6 @@ const GenerateContent = () => {
                 <Clipboard valueToCopy={response} label="Copy" />
               </div>
             </div>
-            {/* <Markdown>{response}</Markdown> */}
             <div style={codeStyles}>
               <div id="markdown"></div>
             </div>
