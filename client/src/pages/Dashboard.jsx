@@ -6,7 +6,7 @@ import Profile from "../components/Profile";
 import GenerateContent from "../components/GenerateContent";
 import apiClient from "../axios/axios";
 
-const Dashboard = () => {
+const Dashboard = ({DarkThemeToggle}) => {
   const [contentList, setContentList] = useState([]);
 
   const getContentList = async() => {
@@ -25,7 +25,7 @@ const Dashboard = () => {
   return (
     <>
       <Routes>
-        <Route element={<Navigation />}>
+        <Route element={<Navigation DarkThemeToggle={DarkThemeToggle} />}>
 
           <Route
             path="/content"

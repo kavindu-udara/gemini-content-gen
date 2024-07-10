@@ -11,7 +11,7 @@ import { Progress } from "flowbite-react";
 import GenerateContent from "./GenerateContent";
 import { Outlet, Route, Routes } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = ({DarkThemeToggle}) => {
   return (
     <div className="flex flex-row fixed top-0 left-0 w-full h-full dark:bg-gray-800 dark:text-white ">
       <div className="basis-1/6 flex flex-col justify-between text-center border-r bg-white dark:border-none px-5  dark:bg-gray-700 dark:text-white ">
@@ -48,7 +48,7 @@ const Navigation = () => {
       </div>
 
       <div className="basis-5/6 ">
-        <Header />
+        <Header DarkThemeToggle={DarkThemeToggle} />
         <Outlet />
       </div>
     </div>

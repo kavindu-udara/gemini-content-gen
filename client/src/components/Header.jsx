@@ -3,7 +3,7 @@ import { Button, Navbar } from "flowbite-react";
 import { BsArrowRightShort } from "react-icons/bs";
 import { IoMdPerson } from "react-icons/io";
 
-const Header = () => {
+const Header = ({DarkThemeToggle}) => {
   return (
     <div className='border-b'>
       <Navbar>
@@ -12,6 +12,7 @@ const Header = () => {
         </Navbar.Brand>
 
         <div className="flex md:order-2">
+        <div className="md:ml-5">{DarkThemeToggle}</div>
           <Button
             size="md"
             gradientDuoTone="pinkToOrange"
