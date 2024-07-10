@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import profileImg from "../assets/profile.jpg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import apiClient from "../axios/axios";
+import { toast } from "react-toastify";
+import { updateUserStart, updateUserSuccess, updateUserFailure } from "../redux/user/userSlice";
+import { Button, Modal } from "flowbite-react";
 
 const Profile = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
+  const [openModal, setOpenModal] = useState(false);
+
+  const dispatch = useDispatch();
 
   // console.log(currentUser);
 
@@ -17,18 +23,33 @@ const Profile = () => {
     e.preventDefault();
 
     const updateProfile = async () => {
+      dispatch(updateUserStart());
       apiClient
-        .post(`/user/update/${currentUser.user._id}`, formData)
+        .post(`/user/update/${currentUser._id}`, formData)
         .then((res) => {
           console.log(res);
+          if (res.data.success) {
+            dispatch(updateUserSuccess(res.data));
+            toast.success(res.data.message);
+          }else{
+            dispatch(updateUserFailure(res.data.message));
+            // toast.error(res.data.message);
+          }
         })
         .catch((err) => {
           console.log(err);
+          dispatch(updateUserFailure(err));
         });
     };
 
     updateProfile();
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <div className=" overflow-y-auto h-full py-10 scroll-smooth">
@@ -49,7 +70,7 @@ const Profile = () => {
                 <input
                   id="username"
                   onChange={handleChange}
-                  defaultValue={currentUser.user.username}
+                  defaultValue={currentUser.username}
                   type="text"
                   className="rounded-lg dark:bg-gray-600 dark:text-white w-full"
                 />
@@ -59,27 +80,58 @@ const Profile = () => {
                 <input
                   id="email"
                   onChange={handleChange}
-                  defaultValue={currentUser.user.email}
+                  defaultValue={currentUser.email}
                   type="text"
                   className="rounded-lg dark:bg-gray-600 dark:text-white w-full"
                 />
               </div>
-              <div>
+              <div >
                 <div className="text-xl font-bold">Password</div>
-                <input
-                  type="text"
-                  className="rounded-lg dark:bg-gray-600 dark:text-white w-full"
-                />
+                <button
+                type="button"
+                onClick={() => setOpenModal(true)}
+                  className="rounded-lg dark:bg-gray-600 dark:text-white w-full py-2 text-left px-2 border border-black items-center"
+                >******</button>
               </div>
             </div>
             <div className="mt-5 content-center items-center text-center">
-              <button type="submit" className="p-3 bg-pink-700 text-white rounded-lg text-center">
-                Save Changes
+              <button
+              disabled={loading}
+                type="submit"
+                className="p-3 bg-pink-700 text-white rounded-lg text-center disabled:bg-pink-500 disabled:cursor-not-allowed"
+              >
+                {loading ? "Updating..." : "Save Changes"}
               </button>
             </div>
           </form>
         </div>
       </div>
+
+      <Modal show={openModal} onClose={() => setOpenModal(false)}>
+        <Modal.Header>Change password</Modal.Header>
+        <Modal.Body>
+          <div className="space-y-6 flex justify-center">
+            <div>
+              <div className="dark:text-white mb-3">
+                <label htmlFor="">Current Password</label>
+                <input type="password" className="w-full rounded-lg dark:bg-gray-600 dark:text-white" />
+              </div>
+              <div className="dark:text-white mb-3">
+                <label htmlFor="">New Password</label>
+                <input type="password" className="w-full rounded-lg dark:bg-gray-600 dark:text-white" />
+              </div>
+              <div className="dark:text-white mb-3">
+                <label htmlFor="">Confirm Password</label>
+                <input type="password" className="w-full rounded-lg dark:bg-gray-600 dark:text-white" />
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer className="flex justify-center">
+          <button onClick={() => setOpenModal(false)} className="p-3 bg-pink-700 text-white rounded-lg hover:bg-slate-600">Change Password</button>
+        </Modal.Footer>
+      </Modal>
+
     </div>
   );
 };

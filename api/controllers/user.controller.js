@@ -17,10 +17,21 @@ export const updateUser = async (req, res, next) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
         if (!updatedUser) {
-            return next(errorHandler(404, "User not found"));
+            res.status(200).json(
+                {
+                    success: false,
+                    message: 'user update failed'
+                }
+            );
         }
         const { password, ...others } = updatedUser._doc;
-        res.status(200).json(others);
+        res.status(200).json(
+            {
+                success: true,
+                user: others,
+                message: 'user updated successfully'
+            }
+        );
     } catch (error) {
         next(error);
     }

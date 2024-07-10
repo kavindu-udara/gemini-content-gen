@@ -51,11 +51,13 @@ const SignIn = () => {
             })
             .then((res) => {
               if (res.data.success) {
+                console.log(res.data.user);
                 dispatch(signInSuccess(res.data));
                 navigate("/dashboard/content");
                 // toast.success(res.data.message);
                 return;
               }
+              // console.log(res);
               dispatch(signInFailure(res.data.message));
               // toast.error(res.data.message);
               // console.log(res);
