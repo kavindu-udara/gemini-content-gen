@@ -98,7 +98,7 @@ const GenerateContent = ({ title, description, inputText, type }) => {
           </div>
           <div className="basis-2/3 rounded-xl shadow-lg p-5 border text-lg">
             <div className=" flex flex-row justify-between mx-5 my-3 items-center">
-              <div className="font-semibold text-lg">Result</div>
+              <div className="font-semibold text-2xl">Result</div>
               <div>
                 <Clipboard valueToCopy={response} label="Copy" />
               </div>

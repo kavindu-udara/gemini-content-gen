@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import profileImg from "../assets/profile.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import apiClient from "../axios/axios";
@@ -8,7 +8,7 @@ import {
   updateUserSuccess,
   updateUserFailure,
 } from "../redux/user/userSlice";
-import { Button, Modal } from "flowbite-react";
+import { Button, Modal, Progress } from "flowbite-react";
 
 const Profile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -17,6 +17,12 @@ const Profile = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [profileImage, setProfileImage] = useState(undefined);
+  const [uploading, setUploading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  
+
+  const selectProfileImageRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -55,11 +61,11 @@ const Profile = () => {
   const handleChangePasswordSubmit = (e) => {
     e.preventDefault();
 
-    const changePassword = async() => {
+    const changePassword = async () => {
       apiClient
         .post(`/user/update/password/${currentUser._id}`, {
           oldPassword: currentPassword,
-          newPassword: newPassword
+          newPassword: newPassword,
         })
         .then((res) => {
           console.log(res);
@@ -76,7 +82,7 @@ const Profile = () => {
         .catch((err) => {
           console.log(err);
         });
-    }
+    };
 
     currentPassword !== "" && newPassword !== "" && confirmPassword !== ""
       ? newPassword === confirmPassword
@@ -101,11 +107,25 @@ const Profile = () => {
             <div className="text-3xl font-bold text-center mb-10">Profile</div>
             <div className="flex justify-center my-5">
               <img
-                src={profileImg}
+                onClick={() => selectProfileImageRef.current.click()}
+                src={currentUser.avatar || profileImg}
                 alt="profile image"
-                className="rounded-full h-32 cursor-pointer"
+                className="rounded-full h-32 cursor-pointer ring-offset-2 ring-2"
+              />
+              <input
+                onChange={(e) => setProfileImage(e.target.files[0])}
+                type="file"
+                className="hidden"
+                accept="image/*"
+                ref={selectProfileImageRef}
               />
             </div>
+            {uploading ? (
+              <div className="flex justify-center mb-5">
+                <Progress progress={progress} color="green" className="w-32" />
+              </div>
+            ) : null}
+
             <div className="grid grid-cols-1 gap-5">
               <div>
                 <div className="text-xl font-bold">Username</div>
