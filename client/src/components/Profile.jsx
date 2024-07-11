@@ -3,13 +3,20 @@ import profileImg from "../assets/profile.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import apiClient from "../axios/axios";
 import { toast } from "react-toastify";
-import { updateUserStart, updateUserSuccess, updateUserFailure } from "../redux/user/userSlice";
+import {
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
+} from "../redux/user/userSlice";
 import { Button, Modal } from "flowbite-react";
 
 const Profile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
   const [openModal, setOpenModal] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
 
@@ -31,7 +38,7 @@ const Profile = () => {
           if (res.data.success) {
             dispatch(updateUserSuccess(res.data));
             toast.success(res.data.message);
-          }else{
+          } else {
             dispatch(updateUserFailure(res.data.message));
             // toast.error(res.data.message);
           }
@@ -43,6 +50,41 @@ const Profile = () => {
     };
 
     updateProfile();
+  };
+
+  const handleChangePasswordSubmit = (e) => {
+    e.preventDefault();
+
+    const changePassword = async() => {
+      apiClient
+        .post(`/user/update/password/${currentUser._id}`, {
+          oldPassword: currentPassword,
+          newPassword: newPassword
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.success) {
+            toast.success(res.data.message);
+            setOpenModal(false);
+            setCurrentPassword("");
+            setNewPassword("");
+            setConfirmPassword("");
+          } else {
+            toast.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    currentPassword !== "" && newPassword !== "" && confirmPassword !== ""
+      ? newPassword === confirmPassword
+        ? currentPassword !== newPassword
+          ? changePassword()
+          : toast.error("New password cannot be the same as old password")
+        : toast.error("Password does not match")
+      : toast.error("Please fill all the fields");
   };
 
   useEffect(() => {
@@ -85,18 +127,20 @@ const Profile = () => {
                   className="rounded-lg dark:bg-gray-600 dark:text-white w-full"
                 />
               </div>
-              <div >
+              <div>
                 <div className="text-xl font-bold">Password</div>
                 <button
-                type="button"
-                onClick={() => setOpenModal(true)}
+                  type="button"
+                  onClick={() => setOpenModal(true)}
                   className="rounded-lg dark:bg-gray-600 dark:text-white w-full py-2 text-left px-2 border border-black items-center"
-                >******</button>
+                >
+                  ******
+                </button>
               </div>
             </div>
             <div className="mt-5 content-center items-center text-center">
               <button
-              disabled={loading}
+                disabled={loading}
                 type="submit"
                 className="p-3 bg-pink-700 text-white rounded-lg text-center disabled:bg-pink-500 disabled:cursor-not-allowed"
               >
@@ -108,30 +152,51 @@ const Profile = () => {
       </div>
 
       <Modal show={openModal} onClose={() => setOpenModal(false)}>
-        <Modal.Header>Change password</Modal.Header>
-        <Modal.Body>
-          <div className="space-y-6 flex justify-center">
-            <div>
-              <div className="dark:text-white mb-3">
-                <label htmlFor="">Current Password</label>
-                <input type="password" className="w-full rounded-lg dark:bg-gray-600 dark:text-white" />
-              </div>
-              <div className="dark:text-white mb-3">
-                <label htmlFor="">New Password</label>
-                <input type="password" className="w-full rounded-lg dark:bg-gray-600 dark:text-white" />
-              </div>
-              <div className="dark:text-white mb-3">
-                <label htmlFor="">Confirm Password</label>
-                <input type="password" className="w-full rounded-lg dark:bg-gray-600 dark:text-white" />
+        <form onSubmit={handleChangePasswordSubmit}>
+          <Modal.Header>Change password</Modal.Header>
+          <Modal.Body>
+            <div className="space-y-6 flex justify-center">
+              <div>
+                <div className="dark:text-white mb-3">
+                  <label htmlFor="">Current Password</label>
+                  <input
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    type="password"
+                    className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
+                  />
+                </div>
+                <div className="dark:text-white mb-3">
+                  <label htmlFor="">New Password</label>
+                  <input
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    type="password"
+                    className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
+                  />
+                </div>
+                <div className="dark:text-white mb-3">
+                  <label htmlFor="">Confirm Password</label>
+                  <input
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    type="password"
+                    className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </Modal.Body>
-        <Modal.Footer className="flex justify-center">
-          <button onClick={() => setOpenModal(false)} className="p-3 bg-pink-700 text-white rounded-lg hover:bg-slate-600">Change Password</button>
-        </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer className="flex justify-center">
+            <button
+              type="submit"
+              className="p-3 bg-pink-700 text-white rounded-lg hover:bg-slate-600"
+            >
+              Change Password
+            </button>
+          </Modal.Footer>
+        </form>
       </Modal>
-
     </div>
   );
 };
