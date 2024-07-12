@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import { FaGoogle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import apiClient from "../axios/axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +9,7 @@ import {
   signInFailure,
 } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
 
@@ -123,15 +123,7 @@ const SignIn = () => {
             {loading ? "Loading..." : "Sign in"}
           </button>
           <div className="text-center">or</div>
-          <div className="grid grid-cols-2 gap-5">
-            <div className="flex items-center gap-5 justify-center rounded-lg p-3 text-center border cursor-pointer hover:bg-fuchsia-50">
-              <FaGoogle className="text-lg text-red-700" />
-              Google
-            </div>
-            <div className="rounded-lg p-3 text-center border cursor-pointer hover:bg-fuchsia-50">
-              Google
-            </div>
-          </div>
+          <OAuth/>
         </form>
       }
     </div>

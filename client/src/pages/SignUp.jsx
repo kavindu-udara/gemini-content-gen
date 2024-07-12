@@ -4,6 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import { toast } from "react-toastify";
 // import axios from "axios";
 import apiClient  from "../axios/axios";
+import OAuth from "../components/OAuth";
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -129,15 +130,7 @@ const SignUp = () => {
             Register
           </button>
           <div className="text-center">or register with</div>
-          <div className="grid grid-cols-2 gap-5">
-            <div className="flex items-center gap-5 justify-center rounded-lg p-2 text-center border cursor-pointer hover:bg-fuchsia-50">
-              <FaGoogle className="text-lg text-red-700" />
-              Google
-            </div>
-            <div className="rounded-lg p-2 text-center border cursor-pointer hover:bg-fuchsia-50">
-              Google
-            </div>
-          </div>
+          <OAuth/>
         </form>
       }
     </div>
