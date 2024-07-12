@@ -3,12 +3,15 @@ import { FaGoogle } from "react-icons/fa";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../firebase/firebase";
 import apiClient from "../axios/axios";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   signInSuccess
 } from "../redux/user/userSlice";
 
 const OAuth = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth(app);
@@ -20,9 +23,12 @@ const OAuth = () => {
       email: result.user.email,
       avatar: result.user.photoURL
     }).then((res) => {
-      dispatch(signInSuccess(res.data));
+      if(res.data.success){
+        dispatch(signInSuccess(res.data));
+        navigate("/dashboard/content");
+      }
     }).catch((err) => {
-      //
+      console.log(err);
     })
   };
 
