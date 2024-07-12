@@ -1,17 +1,45 @@
-import React from 'react';
+import React from "react";
 import { FaGoogle } from "react-icons/fa";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { app } from "../firebase/firebase";
+import apiClient from "../axios/axios";
+import {
+  signInSuccess
+} from "../redux/user/userSlice";
+
 const OAuth = () => {
+  const dispatch = useDispatch();
+  const handleGoogleClick = async () => {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth(app);
+    // popup signin
+    const result = await signInWithPopup(auth, provider);
+    // console.log(result);
+    apiClient.post("/auth/google", {
+      name: result.user.displayName,
+      email: result.user.email,
+      avatar: result.user.photoURL
+    }).then((res) => {
+      dispatch(signInSuccess(res.data));
+    }).catch((err) => {
+      //
+    })
+  };
+
   return (
     <div className="grid grid-cols-2 gap-5">
-      <div className="flex items-center gap-5 justify-center rounded-lg p-3 text-center border cursor-pointer hover:bg-fuchsia-50">
+      <button
+        onClick={handleGoogleClick}
+        className="flex items-center gap-5 justify-center rounded-lg p-3 text-center border cursor-pointer hover:bg-fuchsia-50"
+      >
         <FaGoogle className="text-lg text-red-700" />
         Google
-      </div>
-      <div className="rounded-lg p-3 text-center border cursor-pointer hover:bg-fuchsia-50">
+      </button>
+      <button className="rounded-lg p-3 text-center border cursor-pointer hover:bg-fuchsia-50">
         Google
-      </div>
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default OAuth
+export default OAuth;
