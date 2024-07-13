@@ -13,13 +13,6 @@ const Header = ({DarkThemeToggle}) => {
 
         <div className="flex md:order-2">
         <div className="md:ml-5">{DarkThemeToggle}</div>
-          <Button
-            size="md"
-            gradientDuoTone="pinkToOrange"
-            className="content-center text-xl "
-          >
-            <IoMdPerson />
-          </Button>
           <div className="md:ml-5"></div>
         </div>
       </Navbar>

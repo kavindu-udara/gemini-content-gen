@@ -9,6 +9,13 @@ import {
   updateUserFailure,
 } from "../redux/user/userSlice";
 import { Button, Modal, Progress } from "flowbite-react";
+import {
+  getStorage,
+  uploadBytesResumable,
+  ref,
+  getDownloadURL,
+} from "firebase/storage";
+import { app } from "../firebase/firebase";
 
 const Profile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -18,9 +25,9 @@ const Profile = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [profileImage, setProfileImage] = useState(undefined);
-  const [uploading, setUploading] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
-  
+  const [avatar, setAvatar] = useState(currentUser.avatar);
 
   const selectProfileImageRef = useRef(null);
 
@@ -99,6 +106,47 @@ const Profile = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (profileImage) {
+      handleImageUpload(profileImage);
+    }
+  }, [profileImage]);
+
+  const handleImageUpload = (image) => {
+    setUploading(true);
+    // import storage
+    const storage = getStorage(app);
+    // create unique file name
+    const fileName = new Date().getTime() + image.name;
+    // storage reference
+    const storageRef = ref(storage, `avatars/${fileName}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("upload is " + progress + "% done");
+        setProgress(Math.round(progress));
+        // setUploading(true);
+      },
+      (error) => {
+        toast.error("Image Upload Failed");
+        setUploading(false);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setFormData({ ...formData, avatar: downloadURL });
+          // console.log(downloadURL);
+          setAvatar(downloadURL);
+          setUploading(false);
+        });
+      }
+    );
+  };
+
+  // console.log(currentUser.avatar);
+
   return (
     <div className=" overflow-y-auto h-full py-10 scroll-smooth">
       <div className="flex content-center justify-center items-center h-full">
@@ -108,9 +156,9 @@ const Profile = () => {
             <div className="flex justify-center my-5">
               <img
                 onClick={() => selectProfileImageRef.current.click()}
-                src={currentUser.avatar || profileImg}
+                src={avatar || profileImg}
                 alt="profile image"
-                className="rounded-full h-32 cursor-pointer ring-offset-2 ring-2"
+                className="rounded-full h-32 cursor-pointer"
               />
               <input
                 onChange={(e) => setProfileImage(e.target.files[0])}
@@ -130,6 +178,7 @@ const Profile = () => {
               <div>
                 <div className="text-xl font-bold">Username</div>
                 <input
+                  disabled={loading}
                   id="username"
                   onChange={handleChange}
                   defaultValue={currentUser.username}
@@ -140,6 +189,7 @@ const Profile = () => {
               <div>
                 <div className="text-xl font-bold">Email</div>
                 <input
+                  disabled={loading}
                   id="email"
                   onChange={handleChange}
                   defaultValue={currentUser.email}
@@ -150,6 +200,7 @@ const Profile = () => {
               <div>
                 <div className="text-xl font-bold">Password</div>
                 <button
+                  disabled={loading}
                   type="button"
                   onClick={() => setOpenModal(true)}
                   className="rounded-lg dark:bg-gray-600 dark:text-white w-full py-2 text-left px-2 border border-black items-center"
