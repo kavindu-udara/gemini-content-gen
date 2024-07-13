@@ -42,10 +42,4 @@ export const generate = async (req, res) => {
 
     res.status(200).json({ success: true, response: result.response.text(), message: "success" });
 
-    // usageMetadata: {
-    //     promptTokenCount: 15,
-    //     candidatesTokenCount: 1114,
-    //     totalTokenCount: 1129
-    //   },
-
 }
