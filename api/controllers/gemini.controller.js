@@ -13,19 +13,22 @@ export const generate = async (req, res) => {
     let generatePromt = '';
     if (type == "blog") {
         generatePromt = `generate blog content for this schenario ' ${reqPrompt} '`;
-
     } else if (type == "code") {
         generatePromt = `generate programming code for this schenario ' ${reqPrompt} '`;
-
     } else if (type == "story") {
         generatePromt = `make a story for this schenario ' ${reqPrompt} '`;
-
     } else if (type == "youtube-description") {
         generatePromt = `generate youtube description for this schenario ' ${reqPrompt} '`;
-
     } else if (type == 'podcast') {
         generatePromt = `generate podcast for this schenario ' ${reqPrompt} '`;
-
+    }else if(type == 'letter'){
+        generatePromt = `generate me a letter for this schenario ' ${reqPrompt} '`;
+    }else if(type == 'image-alt'){
+        generatePromt = `generate me a alt text for this image description ' ${reqPrompt} '`;
+    }else if(type == 'meta-desc'){
+        generatePromt = `generate me a seo friendly meta description for this schenario ' ${reqPrompt} '`;
+    }else if(type == 'video-desc'){
+        generatePromt = `generate me a video description for this video schenario ' ${reqPrompt} '`;
     }
 
     const apiKey = process.env.GOOGLE_GEMINI_API_KEY;

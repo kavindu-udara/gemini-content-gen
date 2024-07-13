@@ -12,7 +12,7 @@ const ContentBox = ({ ContentList }) => {
                 key={index}
                 image={content.image}
                 title={content.title}
-                description={content.description}
+                description={content.description.substring(0, 25) + '...'}
                 path={`/dashboard/${content.type}`}
               />
             );
