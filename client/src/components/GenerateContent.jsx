@@ -28,7 +28,7 @@ const GenerateContent = ({ title, description, inputText, type }) => {
       setLoading(true);
       setResponse("Please wait...");
       apiClient
-        .post(`/gemini/generate/${type}`, {
+        .post(`/groq/generate/${type}`, {
           withCredentials: true,
           reqPrompt: promt,
         })
