@@ -109,6 +109,7 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
                 <Clipboard valueToCopy={response} label="Copy" />
               </div>
             </div>
+            <hr />
             <div style={codeStyles}>
               <div id="markdown"></div>
             </div>

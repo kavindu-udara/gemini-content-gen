@@ -6,8 +6,6 @@ dotenv.config();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export const generate = async (req, res) => {
-
-    console.log(req.body);
     
     const type = req.params.type;
 

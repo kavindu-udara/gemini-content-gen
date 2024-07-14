@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ContentBox from "../components/ContentBox";
 import Profile from "../components/Profile";
 import GenerateContent from "../components/GenerateContent";
 import apiClient from "../axios/axios";
+import { toast } from "react-toastify";
 
 const Dashboard = ({DarkThemeToggle}) => {
+  const navigate = useNavigate();
   const [contentList, setContentList] = useState([]);
 
   const getContentList = async() => {
     apiClient.get("/content").then((res) => {
       // setContentList(null);
-      setContentList(res.data.content);
+      if(res.data.success){
+        setContentList(res.data.content);
+      }else{
+        toast.error(res.data.message);
+      }
     }).catch((err) => {
-      console.log(err);
+      toast.error(err.response.data.message);
+      navigate("/signin");
     })
   }
 
