@@ -7,7 +7,7 @@ import { HiHome } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 
-const GenerateContent = ({ title, description, inputText, type }) => {
+const GenerateContent = ({ title, description, inputText, type, tools }) => {
   const [promt, setPromt] = useState("");
   const [response, setResponse] = useState("hello");
   const [loading, setLoading] = useState(false);
@@ -95,6 +95,12 @@ const GenerateContent = ({ title, description, inputText, type }) => {
                 )}
               </span>
             </button>
+            <div className="text-lg mt-5">AI Model</div>
+            <div className="flex">
+            {tools.map((tool) => (
+              <button className="border rounded-lg p-3 mx-3 bg-slate-600 text-white">{tool}</button>
+            ))}
+            </div>
           </div>
           <div className="basis-2/3 rounded-xl shadow-lg p-5 border text-lg">
             <div className=" flex flex-row justify-between mx-5 my-3 items-center">

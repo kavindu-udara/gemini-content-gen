@@ -43,6 +43,7 @@ const Dashboard = ({DarkThemeToggle}) => {
                     description={content.description}
                     inputText={content.inputText}
                     type={content.type}
+                    tools={content.aiTool}
                   />
                 }
               />
