@@ -11,6 +11,7 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
   const [promt, setPromt] = useState("");
   const [response, setResponse] = useState("hello");
   const [loading, setLoading] = useState(false);
+  const [model, setModel] = useState(tools[0]);
 
   const [error, setError] = useState("");
 
@@ -28,7 +29,7 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
       setLoading(true);
       setResponse("Please wait...");
       apiClient
-        .post(`/groq/generate/${type}`, {
+        .post(`/${model}/generate/${type}`, {
           withCredentials: true,
           reqPrompt: promt,
         })
@@ -95,11 +96,11 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
                 )}
               </span>
             </button>
-            <div className="text-lg mt-5">AI Model</div>
+            <div className="text-lg mt-5">Select AI Model</div>
             <div className="flex">
-            {tools.map((tool) => (
-              <button className="border rounded-lg p-3 mx-3 bg-slate-600 text-white">{tool}</button>
-            ))}
+            {tools.map((tool) => 
+              <button className={tool === model ? "bg-fuchsia-600 text-white p-3 rounded-lg mr-3" : "bg-fuchsia-100 p-3 rounded-lg mr-3"} onClick={() => setModel(tool)} >{tool}</button>
+            )}
             </div>
           </div>
           <div className="basis-2/3 rounded-xl shadow-lg p-5 border text-lg">

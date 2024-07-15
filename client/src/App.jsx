@@ -8,7 +8,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+
 function App({ DarkThemeToggle }) {
+
   return (
     <BrowserRouter>
       <ToastContainer />
