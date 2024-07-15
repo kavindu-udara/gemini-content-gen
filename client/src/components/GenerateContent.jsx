@@ -98,9 +98,18 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
             </button>
             <div className="text-lg mt-5">Select AI Model</div>
             <div className="flex">
-            {tools.map((tool) => 
-              <button className={tool === model ? "bg-fuchsia-600 text-white p-3 rounded-lg mr-3" : "bg-fuchsia-100 p-3 rounded-lg mr-3"} onClick={() => setModel(tool)} >{tool}</button>
-            )}
+              {tools.map((tool) => (
+                <button
+                  className={
+                    tool === model
+                      ? "bg-fuchsia-600 text-white p-3 rounded-lg mr-3"
+                      : "bg-fuchsia-100 p-3 rounded-lg mr-3"
+                  }
+                  onClick={() => setModel(tool)}
+                >
+                  {tool}
+                </button>
+              ))}
             </div>
           </div>
           <div className="basis-2/3 rounded-xl shadow-lg p-5 border text-lg">

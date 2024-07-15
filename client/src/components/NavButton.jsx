@@ -3,9 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 
 const NavButton = ({ icon, text, path }) => {
 
-  const active = "flex items-center text-white  hover:bg-fuchsia-600 bg-fuchsia-600 p-3 text-xl  rounded-lg cursor-pointer mx-5 gap-5";
+  const active = "text-3xl bg-gray-400 text-white p-3 rounded-full cursor-pointer  gap-5";
 
-  const inactive = "flex items-center  hover:bg-fuchsia-600 p-3 text-xl  rounded-lg cursor-pointer mx-5 gap-5";
+  const inactive = "text-3xl bg-gray-200 p-3 rounded-full cursor-pointer  gap-5";
 
   return (
     <NavLink

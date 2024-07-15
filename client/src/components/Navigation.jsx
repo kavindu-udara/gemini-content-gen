@@ -13,41 +13,25 @@ import { Outlet, Route, Routes } from "react-router-dom";
 
 const Navigation = ({DarkThemeToggle}) => {
   return (
-    <div className="flex flex-row fixed top-0 left-0 w-full h-full dark:bg-gray-800 dark:text-white ">
-      <div className="basis-1/6 flex flex-col justify-between text-center border-r bg-white dark:border-none px-5  dark:bg-gray-700 dark:text-white ">
+    <div className="flex fixed top-0 left-0 w-full h-full dark:bg-gray-800 dark:text-white">
+      <div className="w-24 flex flex-col justify-between text-center  dark:border-none px-5 bg-gray-100  dark:bg-gray-700 dark:text-white ">
         <div>
-          <div className="text-3xl mt-5 mb-3 font-semibold border-b">
-            ContentGen
-          </div>
-          <div className="grid grid-cols-1 gap-5 mt-3">
+          <div className="grid grid-cols-1 gap-5 mt-3 content-center items-center">
             <NavButton
               icon={<IoIosHome />}
-              text="Home"
               path={"/dashboard/content"}
             />
             <NavButton
               icon={<FaHistory />}
-              text="Profile"
               path={"/dashboard/profile"}
             />
             {/* <NavButton icon={<IoIosFiling />} text="Billing" />
             <NavButton icon={<FaHistory />} text="History" /> */}
           </div>
         </div>
-        <div className="flex flex-col mb-5">
-          <div className="bg-gradient-to-r from-green-400 to-blue-500 rounded-lg h-[150px] mt-10 text-white text-lg text-left p-5">
-            <div className="mb-3">Credits</div>
-            <Progress progress={50} color="blue" />
-            <div className="mt-3">0/10000 Used</div>
-          </div>
-          <div className="bg-slate-50 rounded-lg mt-10 text-lg text-center py-3 font-semibold items-center hover:bg-slate-100 cursor-pointer dark:bg-gray-800">
-            <div className="mb-3">Upgrade</div>
-          </div>
-          <div className="text-xs text-gray-400 mt-10">v1.0.0</div>
-        </div>
       </div>
 
-      <div className="basis-5/6 ">
+      <div className="flex-1">
         <Header DarkThemeToggle={DarkThemeToggle} />
         <Outlet />
       </div>

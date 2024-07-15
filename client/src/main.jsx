@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <Flowbite>
       <PersistGate loading={null} persistor={persistor}>
-        <App DarkThemeToggle={<DarkThemeToggle />} />
+        <App DarkThemeToggle={<DarkThemeToggle className="text-3xl" />} />
         {/* <DarkThemeToggle /> */}
       </PersistGate>
     </Flowbite>

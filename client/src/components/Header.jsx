@@ -1,23 +1,33 @@
-import React from 'react';
+import React from "react";
 import { Button, Navbar } from "flowbite-react";
 import { BsArrowRightShort } from "react-icons/bs";
 import { IoMdPerson } from "react-icons/io";
+import { IoSearchOutline, IoNotificationsOutline } from "react-icons/io5";
 
-const Header = ({DarkThemeToggle}) => {
+const Header = ({ DarkThemeToggle }) => {
   return (
-    <div className='border-b'>
-      <Navbar>
-        <Navbar.Brand >
-            <input type="text"  className='rounded-lg text-black' placeholder='Search...'/>
+    <div>
+      <Navbar className="bg-gray-100 py-5 items-center dark:bg-gray-700">
+        <Navbar.Brand>
+          <div className="flex rounded-lg bg-white items-center border-lg text-black focus:none px-5 py-2">
+            <IoSearchOutline className="text-gray-500" />
+            <input
+              type="text"
+              className="border-none bg-white"
+              placeholder="Search..."
+            />
+          </div>
         </Navbar.Brand>
 
         <div className="flex md:order-2">
-        <div className="md:ml-5">{DarkThemeToggle}</div>
-          <div className="md:ml-5"></div>
+          <div className="text-3xl p-3 rounded-full bg-white dark:text-black cursor-pointer">
+          <IoNotificationsOutline />
+          </div>
+          <div className="md:ml-5">{DarkThemeToggle}</div>
         </div>
       </Navbar>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

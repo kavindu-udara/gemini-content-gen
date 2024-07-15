@@ -3,21 +3,21 @@ import ContentTile from "./ContentTile";
 
 const ContentBox = ({ ContentList }) => {
   return (
-    <div className=" overflow-y-auto h-full py-10 scroll-smooth">
+    <div className="bg-gray-100">
+      <div className=" overflow-y-auto bg-white h-full py-10 scroll-smooth rounded-lg">
         {ContentList ? (
-      <div className="grid md:grid-cols-4 grid-cols-2 gap-5 mx-4 mb-10">
-          {ContentList.map((content, index) => {
-            return (
-              <ContentTile
-                key={index}
-                image={content.image}
-                title={content.title}
-                description={content.description.substring(0, 25) + '...'}
-                path={`/dashboard/${content.type}`}
-              />
-            );
-          }
-          )}
+          <div className="grid md:grid-cols-4 grid-cols-2 gap-5 mx-4 mb-10">
+            {ContentList.map((content, index) => {
+              return (
+                <ContentTile
+                  key={index}
+                  image={content.image}
+                  title={content.title}
+                  description={content.description.substring(0, 25) + "..."}
+                  path={`/dashboard/${content.type}`}
+                />
+              );
+            })}
           </div>
         ) : (
           <div className="grid grid-cols-4 gap-5 mx-4 mb-10">
@@ -29,8 +29,9 @@ const ContentBox = ({ ContentList }) => {
             <div class="w-[350px] h-[160px] bg-slate-100 rounded-lg mt-3 animate-pulse"></div>
             <div class="w-[350px] h-[160px] bg-slate-100 rounded-lg mt-3 animate-pulse"></div>
             <div class="w-[350px] h-[160px] bg-slate-100 rounded-lg mt-3 animate-pulse"></div>
-            </div>
+          </div>
         )}
+      </div>
     </div>
   );
 };
