@@ -1,25 +1,48 @@
 import React from "react";
 import { Card } from "flowbite-react";
 import { FcStart } from "react-icons/fc";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaRegBookmark, FaAmazon } from "react-icons/fa";
+import { ImPinterest2 } from "react-icons/im";
 
-const ContentTile = ({ title, description, path }) => {
+const ContentTile = ({ title, description, path, tools }) => {
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(path);
+  }
   return (
-    <NavLink to={path}>
-      <Card className="max-w-sm mt-3  hover:shadow-lg cursor-pointer bg-gradient-to-r from-indigo-500/50 via-purple-500/50 to-pink-500/50
-      hover:bg-gradient-to-r hover:from-indigo-500/75 hover:via-purple-500/75 hover:to-pink-500/75
-      ">
-        <div>
-          <FcStart className="text-3xl " />
+      <div className="rounded-xl border p-2 dark:bg-gray-400">
+        <div className="rounded-xl bg-blue-100 p-3">
+          <div className="flex flex-row justify-between">
+            <div className="bg-white p-3 rounded-full">
+              <ImPinterest2 />
+            </div>
+            <div className="flex bg-white p-3 rounded-full items-center">
+              <FaRegBookmark />
+            </div>
+          </div>
+          <div className="flex flex-row mt-5">
+              <div className="text-3xl">{title}</div>
+          </div>
+          <div className="mt-5 flex gap-3 flex-wrap">
+            {tools.map((tool) => (
+              <button className="border rounded-full p-2 border-black">
+                {tool}
+              </button>
+            ))}
+          </div>
         </div>
-        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {title}
-        </h5>
-        <p className="font-normal text-gray-700 dark:text-gray-400">
-          {description}
-        </p>
-      </Card>
-    </NavLink>
+        <div className="flex my-5 justify-between mx-5 gap-10">
+          <div className="">
+            <div className="text-xl">{description}</div>
+          </div>
+          <div className="">
+            <button onClick={handleNavigate} className="bg-black rounded-full p-3 text-white text-lg">
+              Generate
+            </button>
+          </div>
+        </div>
+      </div>
   );
 };
 

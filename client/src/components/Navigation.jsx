@@ -10,11 +10,12 @@ import ContentTile from "./ContentTile";
 import { Progress } from "flowbite-react";
 import GenerateContent from "./GenerateContent";
 import { Outlet, Route, Routes } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 
 const Navigation = ({DarkThemeToggle}) => {
   return (
     <div className="flex fixed top-0 left-0 w-full h-full dark:bg-gray-800 dark:text-white">
-      <div className="w-24 flex flex-col justify-between text-center  dark:border-none px-5 bg-gray-100  dark:bg-gray-700 dark:text-white ">
+      <div className="w-24 md:block hidden flex flex-col justify-between text-center  dark:border-none px-5 bg-gray-50  dark:bg-gray-700 dark:text-white ">
         <div>
           <div className="grid grid-cols-1 gap-5 mt-3 content-center items-center">
             <NavButton
@@ -22,7 +23,7 @@ const Navigation = ({DarkThemeToggle}) => {
               path={"/dashboard/content"}
             />
             <NavButton
-              icon={<FaHistory />}
+              icon={<FaUser />}
               path={"/dashboard/profile"}
             />
             {/* <NavButton icon={<IoIosFiling />} text="Billing" />

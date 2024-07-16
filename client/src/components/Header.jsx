@@ -7,7 +7,7 @@ import { IoSearchOutline, IoNotificationsOutline } from "react-icons/io5";
 const Header = ({ DarkThemeToggle }) => {
   return (
     <div>
-      <Navbar className="bg-gray-100 py-5 items-center dark:bg-gray-700">
+      <Navbar className="bg-gray-50 py-5 items-center dark:bg-gray-700">
         <Navbar.Brand>
           <div className="flex rounded-lg bg-white items-center border-lg text-black focus:none px-5 py-2">
             <IoSearchOutline className="text-gray-500" />

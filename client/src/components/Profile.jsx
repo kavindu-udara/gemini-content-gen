@@ -20,7 +20,7 @@ import { app } from "../firebase/firebase";
 const Profile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -150,70 +150,78 @@ const Profile = () => {
   return (
     <div className=" overflow-y-auto h-full py-10 scroll-smooth">
       <div className="flex content-center justify-center items-center h-full">
-        <div className="w-2/6 bg-white dark:bg-gray-800 rounded-lg p-10">
+        <div className="w-2/6 bg-white dark:bg-gray-800 rounded-xl p-3 border">
           <form onSubmit={handleSubmit}>
-            <div className="text-3xl font-bold text-center mb-10">Profile</div>
-            <div className="flex justify-center my-5">
-              <img
-                onClick={() => selectProfileImageRef.current.click()}
-                src={avatar || profileImg}
-                alt="profile image"
-                className="rounded-full h-32 cursor-pointer"
-              />
-              <input
-                onChange={(e) => setProfileImage(e.target.files[0])}
-                type="file"
-                className="hidden"
-                accept="image/*"
-                ref={selectProfileImageRef}
-              />
-            </div>
-            {uploading ? (
-              <div className="flex justify-center mb-5">
-                <Progress progress={progress} color="green" className="w-32" />
+            <div className="bg-blue-100 rounded-xl p-5">
+              <div className="text-3xl font-bold text-center mb-10">
+                Profile
               </div>
-            ) : null}
+              <div className="flex justify-center my-5">
+                <img
+                  onClick={() => selectProfileImageRef.current.click()}
+                  src={avatar || profileImg}
+                  alt="profile image"
+                  className="rounded-full h-32 cursor-pointer"
+                />
+                <input
+                  onChange={(e) => setProfileImage(e.target.files[0])}
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  ref={selectProfileImageRef}
+                />
+              </div>
+              {uploading ? (
+                <div className="flex justify-center mb-5">
+                  <Progress
+                    progress={progress}
+                    color="green"
+                    className="w-32"
+                  />
+                </div>
+              ) : null}
 
-            <div className="grid grid-cols-1 gap-5">
-              <div>
-                <div className="text-xl font-bold">Username</div>
-                <input
-                  disabled={loading}
-                  id="username"
-                  onChange={handleChange}
-                  defaultValue={currentUser.username}
-                  type="text"
-                  className="rounded-lg dark:bg-gray-600 dark:text-white w-full"
-                />
-              </div>
-              <div>
-                <div className="text-xl font-bold">Email</div>
-                <input
-                  disabled={loading}
-                  id="email"
-                  onChange={handleChange}
-                  defaultValue={currentUser.email}
-                  type="text"
-                  className="rounded-lg dark:bg-gray-600 dark:text-white w-full"
-                />
-              </div>
-              <div>
-                <div className="text-xl font-bold">Password</div>
-                <button
-                  disabled={loading}
-                  type="button"
-                  onClick={() => setOpenModal(true)}
-                  className="rounded-lg dark:bg-gray-600 dark:text-white w-full py-2 text-left px-2 border border-black items-center"
-                >
-                  ******
-                </button>
+              <div className="grid grid-cols-1 gap-5">
+                <div>
+                  <div className="text-xl font-bold">Username</div>
+                  <input
+                    disabled={loading}
+                    id="username"
+                    onChange={handleChange}
+                    defaultValue={currentUser.username}
+                    type="text"
+                    className="rounded-lg dark:bg-gray-600 dark:text-white w-full border-none"
+                  />
+                </div>
+                <div>
+                  <div className="text-xl font-bold">Email</div>
+                  <input
+                    disabled={loading}
+                    id="email"
+                    onChange={handleChange}
+                    defaultValue={currentUser.email}
+                    type="text"
+                    className="rounded-lg dark:bg-gray-600 dark:text-white w-full border-none"
+                  />
+                </div>
+                <div>
+                  <div className="text-xl font-bold">Password</div>
+                  <button
+                    disabled={loading}
+                    type="button"
+                    onClick={() => setOpenModal(true)}
+                    className="rounded-lg dark:bg-gray-600 bg-white dark:text-white w-full py-2 text-left px-2 border border-black items-center border-none"
+                  >
+                    ******
+                  </button>
+                </div>
               </div>
             </div>
             <div className="mt-5 content-center items-center text-center">
               <button
                 disabled={loading}
                 type="submit"
-                className="p-3 bg-pink-700 text-white rounded-lg text-center disabled:bg-pink-500 disabled:cursor-not-allowed"
+                className="p-3 bg-black text-white rounded-full text-center disabled:bg-white disabled:border disabled:border-black disabled:text-black disabled:cursor-not-allowed"
               >
                 {loading ? "Updating..." : "Save Changes"}
               </button>
@@ -227,45 +235,42 @@ const Profile = () => {
           <Modal.Header>Change password</Modal.Header>
           <Modal.Body>
             <div className="space-y-6 flex justify-center">
-              <div>
-                <div className="dark:text-white mb-3">
-                  <label htmlFor="">Current Password</label>
-                  <input
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    type="password"
-                    className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
-                  />
+              <div className="border p-3 rounded-xl">
+                <div className="bg-blue-100 rounded-xl p-3">
+                  <div className="dark:text-white mb-3">
+                    <label htmlFor="">Current Password</label>
+                    <input
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      type="password"
+                      className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
+                    />
+                  </div>
+                  <div className="dark:text-white mb-3">
+                    <label htmlFor="">New Password</label>
+                    <input
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      type="password"
+                      className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
+                    />
+                  </div>
+                  <div className="dark:text-white mb-3">
+                    <label htmlFor="">Confirm Password</label>
+                    <input
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      type="password"
+                      className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
+                    />
+                  </div>
                 </div>
-                <div className="dark:text-white mb-3">
-                  <label htmlFor="">New Password</label>
-                  <input
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    type="password"
-                    className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
-                  />
-                </div>
-                <div className="dark:text-white mb-3">
-                  <label htmlFor="">Confirm Password</label>
-                  <input
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    type="password"
-                    className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
-                  />
+                <div className="my-3 text-center">
+                  <button type="submit" className="bg-black rounded-full p-3 text-white">Change Password</button>
                 </div>
               </div>
             </div>
           </Modal.Body>
-          <Modal.Footer className="flex justify-center">
-            <button
-              type="submit"
-              className="p-3 bg-pink-700 text-white rounded-lg hover:bg-slate-600"
-            >
-              Change Password
-            </button>
-          </Modal.Footer>
         </form>
       </Modal>
     </div>
