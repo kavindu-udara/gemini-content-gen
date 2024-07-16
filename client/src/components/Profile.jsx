@@ -20,7 +20,7 @@ import { app } from "../firebase/firebase";
 const Profile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -148,9 +148,9 @@ const Profile = () => {
   // console.log(currentUser.avatar);
 
   return (
-    <div className=" overflow-y-auto h-full py-10 scroll-smooth">
-      <div className="flex content-center justify-center items-center h-full">
-        <div className="w-2/6 bg-white dark:bg-gray-800 rounded-xl p-3 border">
+    <div className=" overflow-y-auto bg-gray-50 h-full scroll-smooth">
+      <div className="flex rounded-xl  py-10  bg-white dark:bg-gray-800 content-center md:justify-center md:items-center h-full">
+        <div className="md:w-2/6 w-full bg-white dark:bg-gray-800 rounded-xl p-3 border">
           <form onSubmit={handleSubmit}>
             <div className="bg-blue-100 rounded-xl p-5">
               <div className="text-3xl font-bold text-center mb-10">
@@ -243,7 +243,7 @@ const Profile = () => {
                       value={currentPassword}
                       onChange={(e) => setCurrentPassword(e.target.value)}
                       type="password"
-                      className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
+                      className="w-full border-none rounded-lg dark:bg-gray-600 dark:text-white"
                     />
                   </div>
                   <div className="dark:text-white mb-3">
@@ -252,7 +252,7 @@ const Profile = () => {
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                       type="password"
-                      className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
+                      className="w-full rounded-lg border-none dark:bg-gray-600 dark:text-white"
                     />
                   </div>
                   <div className="dark:text-white mb-3">
@@ -261,7 +261,7 @@ const Profile = () => {
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       type="password"
-                      className="w-full rounded-lg dark:bg-gray-600 dark:text-white"
+                      className="w-full rounded-lg border-none dark:bg-gray-600 dark:text-white"
                     />
                   </div>
                 </div>

@@ -40,7 +40,7 @@ export const generate = async (req, res) => {
 
 
     const result = await model.generateContent(generatePromt);
-    console.log(result);
+    // console.log(result);
     const response = result.response;
     // console.log(response.usageMetadata.totalTokenCount);
 

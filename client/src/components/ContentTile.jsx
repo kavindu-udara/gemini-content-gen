@@ -4,6 +4,7 @@ import { FcStart } from "react-icons/fc";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaRegBookmark, FaAmazon } from "react-icons/fa";
 import { ImPinterest2 } from "react-icons/im";
+import { BsStars } from "react-icons/bs";
 
 const ContentTile = ({ title, description, path, tools }) => {
   const navigate = useNavigate();
@@ -15,9 +16,9 @@ const ContentTile = ({ title, description, path, tools }) => {
         <div className="rounded-xl bg-blue-100 p-3">
           <div className="flex flex-row justify-between">
             <div className="bg-white p-3 rounded-full">
-              <ImPinterest2 />
+              <BsStars />
             </div>
-            <div className="flex bg-white p-3 rounded-full items-center">
+            <div className="flex bg-white p-3 rounded-full items-center cursor-pointer">
               <FaRegBookmark />
             </div>
           </div>

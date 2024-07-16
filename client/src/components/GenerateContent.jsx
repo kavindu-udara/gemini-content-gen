@@ -126,7 +126,7 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
               </div>
             </div>
 
-            <div className="bg-blue-100 rounded-xl p-5">
+            <div className="bg-blue-100 rounded-xl p-5 mb-10">
               <div style={codeStyles}>
                 <div id="markdown"></div>
               </div>
