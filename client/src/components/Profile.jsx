@@ -148,11 +148,11 @@ const Profile = () => {
   // console.log(currentUser.avatar);
 
   return (
-    <div className=" overflow-y-auto bg-gray-50 h-full scroll-smooth">
+    <div className=" overflow-y-auto bg-gray-50 dark:bg-gray-700 h-full scroll-smooth">
       <div className="flex rounded-xl  py-10  bg-white dark:bg-gray-800 content-center md:justify-center md:items-center h-full">
         <div className="md:w-2/6 w-full bg-white dark:bg-gray-800 rounded-xl p-3 border">
           <form onSubmit={handleSubmit}>
-            <div className="bg-blue-100 rounded-xl p-5">
+            <div className="bg-blue-100 dark:text-black rounded-xl p-5">
               <div className="text-3xl font-bold text-center mb-10">
                 Profile
               </div>
@@ -235,9 +235,9 @@ const Profile = () => {
           <Modal.Header>Change password</Modal.Header>
           <Modal.Body>
             <div className="space-y-6 flex justify-center">
-              <div className="border p-3 rounded-xl">
-                <div className="bg-blue-100 rounded-xl p-3">
-                  <div className="dark:text-white mb-3">
+              <div className="border dark:bg-gray-600 p-3 rounded-xl">
+                <div className="bg-blue-100 dark:text-black rounded-xl p-3">
+                  <div className=" mb-3">
                     <label htmlFor="">Current Password</label>
                     <input
                       value={currentPassword}
@@ -246,7 +246,7 @@ const Profile = () => {
                       className="w-full border-none rounded-lg dark:bg-gray-600 dark:text-white"
                     />
                   </div>
-                  <div className="dark:text-white mb-3">
+                  <div className="dark:text-black mb-3">
                     <label htmlFor="">New Password</label>
                     <input
                       value={newPassword}
@@ -255,7 +255,7 @@ const Profile = () => {
                       className="w-full rounded-lg border-none dark:bg-gray-600 dark:text-white"
                     />
                   </div>
-                  <div className="dark:text-white mb-3">
+                  <div className="dark:text-black mb-3">
                     <label htmlFor="">Confirm Password</label>
                     <input
                       value={confirmPassword}

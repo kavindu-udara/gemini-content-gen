@@ -12,8 +12,8 @@ const ContentTile = ({ title, description, path, tools }) => {
     navigate(path);
   }
   return (
-      <div className="rounded-xl border p-2 dark:bg-gray-400">
-        <div className="rounded-xl bg-blue-100 p-3">
+      <div className="rounded-xl border dark:border-none p-2 dark:text-black dark:bg-gray-700">
+        <div className="rounded-xl bg-blue-100 dark:bg-blue-100 p-3">
           <div className="flex flex-row justify-between">
             <div className="bg-white p-3 rounded-full">
               <BsStars />
@@ -35,7 +35,7 @@ const ContentTile = ({ title, description, path, tools }) => {
         </div>
         <div className="flex my-5 justify-between mx-5 gap-10">
           <div className="">
-            <div className="text-xl">{description}</div>
+            <div className="text-xl dark:text-white">{description}</div>
           </div>
           <div className="">
             <button onClick={handleNavigate} className="bg-black rounded-full p-3 text-white text-lg">

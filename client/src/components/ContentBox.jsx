@@ -9,8 +9,8 @@ const ContentBox = ({ ContentList }) => {
 
   return (
     <div className="bg-gray-50 dark:bg-gray-700  overflow-y-auto h-full scroll-smooth">
-      <div className=" bg-white  py-10  rounded-xl">
-        <div className="text-4xl text-gray-600 ml-5 my-5">Good Morning</div>
+      <div className=" bg-white dark:bg-gray-800  py-10  rounded-xl">
+        <div className="text-4xl text-gray-600 ml-5 my-5 dark:text-white">Good Morning</div>
         {ContentList ? (
 
           <div className="grid md:grid-cols-4 grid-cols-1  gap-5 mx-4 mb-10">

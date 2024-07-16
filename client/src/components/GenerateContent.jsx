@@ -59,8 +59,8 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
   const codeStyles = {};
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-700 h-full overflow-y-auto scroll-smooth mb-10">
-      <div className=" bg-white rounded-xl py-10 ">
+    <div className="bg-gray-50 dark:text-white dark:bg-gray-700 h-full overflow-y-auto scroll-smooth mb-10">
+      <div className=" bg-white dark:bg-gray-800 rounded-xl py-10 ">
         <NavLink to={"/dashboard/content"}>
           <Breadcrumb aria-label="Default breadcrumb example" className="mx-5">
             <Breadcrumb.Item href="#" icon={HiHome}>
@@ -71,15 +71,15 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
         </NavLink>
         <div className="flex flex-col gap-10  mx-5 my-5">
           <div className="basis-1/3 rounded-xl border  p-2">
-            <div className="rounded-xl bg-blue-100 p-5">
-              <button className="bg-white rounded-full mb-5 p-3 text-lg">
+            <div className="rounded-xl bg-blue-100 dark:bg-gray-700 p-5">
+              <button className="bg-white dark:text-black rounded-full mb-5 p-3 text-lg">
                 {title}
               </button>
               <div className="text-gray-400 mb-5 text-lg">{description}</div>
               <div className="mb-3 text-2xl">{inputText}</div>
               <input
                 type="text"
-                className="rounded-lg border-none w-full text-lg dark:bg-gray-800"
+                className="rounded-lg dark:bg-gray-600 border-none w-full text-lg "
                 onChange={(e) => setPromt(e.target.value)}
                 value={promt}
               />
@@ -90,7 +90,7 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
                     className={
                       tool === model
                         ? "bg-black text-white p-3 rounded-full mr-3"
-                        : " p-3 rounded-full border border-black mr-3"
+                        : " p-3 rounded-full dark:border-white border border-black mr-3"
                     }
                     onClick={() => setModel(tool)}
                   >
@@ -103,7 +103,7 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
             <button
               onClick={() => Generate()}
               disabled={loading}
-              className="rounded-full bg-blue-100 disabled:bg-blue-50  p-3  my-5 ml-3 text-lg text-left hover:bg-blue-200"
+              className="rounded-full dark:bg-gray-700 dark:disabled:bg-gray-600 bg-blue-100 disabled:bg-blue-50  p-3  my-5 ml-3 text-lg text-left hover:bg-blue-200"
             >
               <span className="pl-3">
                 {loading ? (
@@ -126,7 +126,7 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
               </div>
             </div>
 
-            <div className="bg-blue-100 rounded-xl p-5 mb-10">
+            <div className="bg-blue-100 dark:bg-gray-700 rounded-xl p-5 mb-10">
               <div style={codeStyles}>
                 <div id="markdown"></div>
               </div>
