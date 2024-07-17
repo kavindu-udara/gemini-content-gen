@@ -63,13 +63,6 @@ export const getContent = (req, res) => {
           type: "video-desc",
           aiTool: ['gemini', 'groq']
         },
-        {
-          title: "speech to text",
-          description: "A tool that convert speech into text",
-          inputText: "describe your schenario",
-          type: "speech-to-text",
-          aiTool: ['groq']
-        },
       ];
     res.json({ success:true, content: ContentList ,message: "Success" });
 }

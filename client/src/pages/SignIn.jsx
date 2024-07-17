@@ -35,12 +35,10 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // toast.error("Please enter email and password");
     if (email && password) {
       const isValidEmail = /\S+@\S+\.\S+/.test(email);
       if (!isValidEmail) {
         dispatch(signInFailure("Invalid email address"));
-        // toast.error("Invalid email address");
       } else {
         const login = async () => {
           dispatch(signInStart());
@@ -54,23 +52,18 @@ const SignIn = () => {
                 console.log(res.data.user);
                 dispatch(signInSuccess(res.data));
                 navigate("/dashboard/content");
-                // toast.success(res.data.message);
                 return;
               }
               // console.log(res);
               dispatch(signInFailure(res.data.message));
-              // toast.error(res.data.message);
-              // console.log(res);
             })
             .catch((err) => {
               dispatch(signInFailure(err.message));
-              // console.log(err);
             });
         };
         login();
       }
 
-      // toast.success("Login successful");
     }
   };
 
