@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 // import axios from "axios";
 import apiClient  from "../axios/axios";
 import OAuth from "../components/OAuth";
+import { NavLink, useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -28,38 +29,15 @@ const SignUp = () => {
     }
 
     password === passwordRetype ? register() : toast.error("Password does not match");
-
-    // toast("🦄 Wow so easy!", {
-    //   position: "top-right",
-    //   autoClose: 5000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    // });
-    // toast.error("🦄 Wow so easy!", {
-    //   position: "top-right",
-    //   autoClose: 5000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    // });
   };
 
   return (
-    <div className="h-screen flex items-center justify-center">
-      {/* Same as */}
-      {/* <ToastContainer /> */}
-      {
+    <div className="h-screen flex items-center flex-col justify-center">
         <form
           onSubmit={handleSubmit}
-          className="flex max-w-md flex-col gap-4 shadow-lg p-5 border rounded-lg w-[500px]"
+          className="flex max-w-md flex-col gap-4 p-3 border rounded-xl w-[500px]"
         >
+          <div className="bg-blue-100 p-5 rounded-xl">
           <div>
             <div className="mb-2 block">
               <Label htmlFor="username" value="Your username" />
@@ -75,7 +53,7 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <div className="mb-2 block">
+            <div className="my-2 block">
               <Label htmlFor="email" value="Your email" />
             </div>
             <TextInput
@@ -89,7 +67,7 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <div className="mb-2 block">
+            <div className="my-2 block">
               <Label htmlFor="password2" value="Your password" />
             </div>
             <TextInput
@@ -102,7 +80,7 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <div className="mb-2 block">
+            <div className="my-2 block">
               <Label htmlFor="repeat-password" value="Repeat password" />
             </div>
             <TextInput
@@ -114,25 +92,14 @@ const SignUp = () => {
               shadow
             />
           </div>
-          <div className="flex items-center gap-2">
-            <Checkbox id="agree" />
-            <Label htmlFor="agree" className="flex">
-              I agree with the&nbsp;
-              <a
-                href="#"
-                className="text-cyan-600 hover:underline dark:text-cyan-500"
-              >
-                terms and conditions
-              </a>
-            </Label>
           </div>
-          <button className="bg-fuchsia-700 hover:bg-fuchsia-800 text-white rounded-lg p-2">
+          <button className="bg-black  text-white rounded-full p-2">
             Register
           </button>
           <div className="text-center">or register with</div>
           <OAuth/>
         </form>
-      }
+        <div className="text-center mt-5">Already have an account? <NavLink to={"/signin"} className={"text-blue-500"}>Sign in</NavLink></div>
     </div>
   );
 };

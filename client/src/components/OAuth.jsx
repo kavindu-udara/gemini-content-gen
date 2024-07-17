@@ -33,15 +33,13 @@ const OAuth = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-5">
+    <div className="flex items-center justify-center">
       <button
+        type="button"
         onClick={handleGoogleClick}
-        className="flex items-center gap-5 justify-center rounded-lg p-3 text-center border cursor-pointer hover:bg-fuchsia-50"
+        className="flex items-center gap-5 w-full justify-center rounded-full p-3 text-center border cursor-pointer hover:bg-blue-50 bg-blue-100"
       >
         <FaGoogle className="text-lg text-red-700" />
-        Google
-      </button>
-      <button className="rounded-lg p-3 text-center border cursor-pointer hover:bg-fuchsia-50">
         Google
       </button>
     </div>

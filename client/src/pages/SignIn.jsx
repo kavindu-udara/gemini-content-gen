@@ -8,11 +8,10 @@ import {
   signInSuccess,
   signInFailure,
 } from "../redux/user/userSlice";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 
 const SignIn = () => {
-
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -22,15 +21,11 @@ const SignIn = () => {
   // const [loading, setLoading] = useState((state) => state.user);
   const { loading, error } = useSelector((state) => state.user);
 
-  
-
   useEffect(() => {
     if (error) {
       toast.error(error);
     }
   }, [error]);
-
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,62 +58,62 @@ const SignIn = () => {
         };
         login();
       }
-
     }
   };
 
   return (
-    <div className="h-screen flex items-center justify-center">
-      {
+    <div className="h-screen flex items-center justify-center flex-col">
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className="flex max-w-md flex-col gap-4 shadow-lg p-5 border rounded-lg w-[500px]"
+          className="flex max-w-md flex-col gap-4 p-3 border rounded-xl w-[500px]"
         >
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="email2" value="Your email" />
+          <div className="bg-blue-100 rounded-xl p-5">
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="email2" value="Your email" />
+              </div>
+              <TextInput
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                id="email2"
+                type="email"
+                placeholder=""
+                required
+                shadow
+                name="email"
+              />
             </div>
-            <TextInput
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              id="email2"
-              type="email"
-              placeholder="name@flowbite.com"
-              required
-              shadow
-              name="email"
-            />
-          </div>
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="password2" value="Your password" />
+            <div>
+              <div className="my-2 block">
+                <Label htmlFor="password2" value="Your password" />
+              </div>
+              <TextInput
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                id="password2"
+                type="password"
+                required
+                shadow
+              />
             </div>
-            <TextInput
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              id="password2"
-              type="password"
-              required
-              shadow
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <Checkbox id="agree" />
-            <Label htmlFor="agree" className="flex">
-              Remember me&nbsp;
-            </Label>
+            <div className="mt-3 flex items-center gap-2">
+              <Checkbox id="agree" />
+              <Label htmlFor="agree" className="flex">
+                Remember me&nbsp;
+              </Label>
+            </div>
           </div>
           <button
             type="submit"
-            className="bg-fuchsia-700 hover:bg-fuchsia-800 text-white rounded-lg p-3 disabled:bg-fuchsia-500"
+            className="bg-black rounded-full text-white p-3 disabled:bg-fuchsia-500"
             disabled={loading}
           >
             {loading ? "Loading..." : "Sign in"}
           </button>
           <div className="text-center">or</div>
-          <OAuth/>
+          <OAuth />
         </form>
-      }
+        <div className="text-center mt-5">Don't have an account? <NavLink to={"/signup"} className={"text-blue-500"}>Sign up</NavLink></div>
     </div>
   );
 };
