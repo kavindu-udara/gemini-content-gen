@@ -12,13 +12,6 @@ const HomeHeader = ({DarkThemeToggle}) => {
         </Navbar.Brand>
 
         <div className="flex md:order-2">
-          <Button
-            size="md"
-            gradientDuoTone="pinkToOrange"
-            className="content-center text-xl "
-          >
-            Get started <BsArrowRightShort className="text-xl" />
-          </Button>
           <div className="md:ml-5">{DarkThemeToggle}</div>
         </div>
       </Navbar>

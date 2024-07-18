@@ -105,12 +105,12 @@ const SignIn = () => {
           </div>
           <button
             type="submit"
-            className="bg-black rounded-full text-white p-3 disabled:bg-fuchsia-500"
+            className="bg-black rounded-full text-white p-3 disabled:bg-gray-900 disabled:text-gray-300 disabled:cursor-not-allowed"
             disabled={loading}
           >
             {loading ? "Loading..." : "Sign in"}
           </button>
-          <div className="text-center">or</div>
+          <div className="text-center">or signin with</div>
           <OAuth />
         </form>
         <div className="text-center mt-5">Don't have an account? <NavLink to={"/signup"} className={"text-blue-500"}>Sign up</NavLink></div>

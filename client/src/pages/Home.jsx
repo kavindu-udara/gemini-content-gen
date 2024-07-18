@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
+import {  Card, Checkbox, Label, TextInput } from "flowbite-react";
 import HomeHeader from "../components/HomeHeader";
 import { BsArrowRightShort } from "react-icons/bs";
 import HomeTile from "../components/HomeTile";
@@ -19,14 +19,12 @@ const Home = ({DarkThemeToggle}) => {
         <div className="text-xl mt-5 text-gray-400">
           Powered by Google Gemini and Groq
         </div>
-        <Button
+        <button
           size="xl"
-          gradientDuoTone="pinkToOrange"
-          className="content-center text-xl mt-5 font-semibold"
+          className="content-center rounded-full p-3 text-xl mt-5 font-semibold bg-black text-white dark:border dark:border-white"
         >
-          <NavLink to='/dashboard/content'>Get started</NavLink>
-           <BsArrowRightShort className="text-2xl" />
-        </Button>
+          <NavLink to='/dashboard/content'>Get started </NavLink>
+        </button>
       </div>
       <div className="grid sm:grid-cols-4 gap-5 mx-5 bg-white dark:bg-gray-800 grid-cols-2 pb-5">
         <HomeTile icon={<MdDevices />} title={"25+ templates"} description={"Responsive, and mobile-first project on the web"} />

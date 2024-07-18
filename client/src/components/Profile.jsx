@@ -16,8 +16,12 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "../firebase/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+
+  const navigate = useNavigate();
+
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
   const [openModal, setOpenModal] = useState(false);
@@ -32,8 +36,6 @@ const Profile = () => {
   const selectProfileImageRef = useRef(null);
 
   const dispatch = useDispatch();
-
-  // console.log(currentUser);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -53,7 +55,6 @@ const Profile = () => {
             toast.success(res.data.message);
           } else {
             dispatch(updateUserFailure(res.data.message));
-            // toast.error(res.data.message);
           }
         })
         .catch((err) => {
@@ -128,7 +129,6 @@ const Profile = () => {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("upload is " + progress + "% done");
         setProgress(Math.round(progress));
-        // setUploading(true);
       },
       (error) => {
         toast.error("Image Upload Failed");
@@ -137,7 +137,6 @@ const Profile = () => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setFormData({ ...formData, avatar: downloadURL });
-          // console.log(downloadURL);
           setAvatar(downloadURL);
           setUploading(false);
         });
@@ -145,11 +144,14 @@ const Profile = () => {
     );
   };
 
-  // console.log(currentUser.avatar);
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/signin");
+  }
 
   return (
     <div className=" overflow-y-auto bg-gray-50 dark:bg-gray-700 h-full scroll-smooth">
-      <div className="flex rounded-xl  py-10  bg-white dark:bg-gray-800 content-center md:justify-center md:items-center h-full">
+      <div className="flex flex-col rounded-xl  py-10  bg-white dark:bg-gray-800 content-center md:justify-center md:items-center h-full">
         <div className="md:w-2/6 w-full bg-white dark:bg-gray-800 rounded-xl p-3 border">
           <form onSubmit={handleSubmit}>
             <div className="bg-blue-100 dark:text-black rounded-xl p-5">
@@ -228,6 +230,7 @@ const Profile = () => {
             </div>
           </form>
         </div>
+        <button onClick={handleLogout} className="bg-red-500 rounded-full mt-5 p-3 text-white">Logout</button>
       </div>
 
       <Modal show={openModal} onClose={() => setOpenModal(false)}>

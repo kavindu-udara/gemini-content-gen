@@ -13,7 +13,7 @@ const Header = ({ DarkThemeToggle, search, setSearch }) => {
             <IoSearchOutline className="text-gray-500" />
             <input
               type="text"
-              className="border-none bg-white"
+              className="border-none bg-white focus:ring-0"
               placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
