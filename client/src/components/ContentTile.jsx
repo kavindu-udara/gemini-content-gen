@@ -5,8 +5,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { FaRegBookmark, FaAmazon } from "react-icons/fa";
 import { ImPinterest2 } from "react-icons/im";
 import { BsStars } from "react-icons/bs";
+import { FaBookmark } from "react-icons/fa6";
 
-const ContentTile = ({ title, description, path, tools }) => {
+const ContentTile = ({ title, description, path, tools, saved }) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate(path);
@@ -19,7 +20,7 @@ const ContentTile = ({ title, description, path, tools }) => {
               <BsStars />
             </div>
             <div className="flex bg-white p-3 rounded-full items-center cursor-pointer">
-              <FaRegBookmark />
+              {saved ? <FaBookmark /> : <FaRegBookmark /> }
             </div>
           </div>
           <div className="flex flex-row mt-5">

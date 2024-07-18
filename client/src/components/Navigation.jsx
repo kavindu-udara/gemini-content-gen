@@ -11,6 +11,7 @@ import { Progress } from "flowbite-react";
 import GenerateContent from "./GenerateContent";
 import { Outlet, Route, Routes } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa6";
 
 const Navigation = ({ DarkThemeToggle, search, setSearch }) => {
   return (
@@ -19,6 +20,7 @@ const Navigation = ({ DarkThemeToggle, search, setSearch }) => {
         <div>
           <div className="grid grid-cols-1 gap-5 mt-3 content-center items-center">
             <NavButton icon={<IoIosHome />} path={"/dashboard/content"} />
+            <NavButton icon={<FaBookmark />} path={"/dashboard/saved"} />
             <NavButton icon={<FaUser />} path={"/dashboard/profile"} />
           </div>
         </div>

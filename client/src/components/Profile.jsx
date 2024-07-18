@@ -230,7 +230,7 @@ const Profile = () => {
             </div>
           </form>
         </div>
-        <button onClick={handleLogout} className="bg-red-500 rounded-full mt-5 p-3 text-white">Logout</button>
+        <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 rounded-full mt-5 p-3 text-white">Logout</button>
       </div>
 
       <Modal show={openModal} onClose={() => setOpenModal(false)}>

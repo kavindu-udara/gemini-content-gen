@@ -66,3 +66,45 @@ export const getContent = (req, res) => {
       ];
     res.json({ success:true, content: ContentList ,message: "Success" });
 }
+
+export const getSavedContent = (req, res) => {
+  const savedContentList = [
+      {
+        title: "Blog Content",
+        description: "A tool that generate blog content",
+        inputText: "Describe the content you want to generate",
+        type: "blog",
+        aiTool: ['gemini', 'groq']
+      },
+      {
+        title: "Code Content",
+        description: "A tool that generate code content",
+        inputText: "Describe the content you want to generate",
+        type: "code",
+        aiTool: ['gemini', 'groq']
+      },
+      {
+        title: "Story Content",
+        description: "A tool that generate story content",
+        inputText: "Describe the content you want to generate",
+        type: "story",
+        aiTool: ['gemini', 'groq']
+      },
+      {
+        title: "YouTube Description",
+        description: "A tool that generate youtube description",
+        inputText: "Describe the content you want to generate",
+        type: "youtube-description",
+        aiTool: ['gemini', 'groq']
+      },
+      {
+        title: "Podcast Content",
+        description: "A tool that generate podcast content",
+        inputText: "Describe the podcast title you want to generate",
+        type: "podcast",
+        aiTool: ['gemini', 'groq']
+      },
+    ];
+    
+    res.json({ success:true, content: savedContentList ,message: "Success" });
+}
