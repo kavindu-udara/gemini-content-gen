@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Navbar } from "flowbite-react";
 import { BsArrowRightShort } from "react-icons/bs";
 import { IoMdPerson } from "react-icons/io";
 import { IoSearchOutline, IoNotificationsOutline } from "react-icons/io5";
 
-const Header = ({ DarkThemeToggle }) => {
+const Header = ({ DarkThemeToggle, search, setSearch }) => {
   return (
     <div>
       <Navbar className="bg-gray-50 py-5 items-center dark:bg-gray-700">
@@ -15,13 +15,15 @@ const Header = ({ DarkThemeToggle }) => {
               type="text"
               className="border-none bg-white"
               placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
         </Navbar.Brand>
 
         <div className="flex md:order-2">
           <div className="text-3xl p-3 rounded-full bg-white dark:text-black cursor-pointer">
-          <IoNotificationsOutline />
+            <IoNotificationsOutline />
           </div>
           <div className="md:ml-5">{DarkThemeToggle}</div>
         </div>

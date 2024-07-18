@@ -10,12 +10,15 @@ import { toast } from "react-toastify";
 const Dashboard = ({DarkThemeToggle}) => {
   const navigate = useNavigate();
   const [contentList, setContentList] = useState([]);
+  const [search, setSearch] = useState(null);
+  const [searchContent, setSearchContent] = useState(contentList);
 
   const getContentList = async() => {
     apiClient.get("/content").then((res) => {
       // setContentList(null);
       if(res.data.success){
         setContentList(res.data.content);
+        setSearchContent(res.data.content);
       }else{
         toast.error(res.data.message);
       }
@@ -29,14 +32,27 @@ const Dashboard = ({DarkThemeToggle}) => {
     getContentList();
   }, [])
 
+  useEffect(() => {
+    if (search) {
+      setSearchContent([]);
+      contentList.filter((content) => {
+        if (content.title.toLowerCase().includes(search.toLowerCase())) {
+          setSearchContent((prev) => [...prev, content]);
+        }
+      })
+    }else{
+      setSearchContent(contentList);
+    }
+  }, [search]);
+
   return (
     <>
       <Routes>
-        <Route element={<Navigation DarkThemeToggle={DarkThemeToggle} />}>
+        <Route element={<Navigation DarkThemeToggle={DarkThemeToggle} search={search} setSearch={setSearch} />}>
 
           <Route
             path="/content"
-            element={<ContentBox ContentList={contentList} />}
+            element={<ContentBox ContentList={searchContent} />}
           />
 
           {contentList.map((content, index) => {
