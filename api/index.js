@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.route.js";
 import geminiRouter from "./routes/gemini.route.js";
 import groqRouter from "./routes/groq.route.js";
 import contentRouter from "./routes/content.route.js";
+import adminRouter from "./routes/admin.route.js";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -41,6 +42,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/gemini', geminiRouter);
 app.use('/api/groq', groqRouter);
 app.use('/api/content', contentRouter);
+
+app.use('/api/admin',adminRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
