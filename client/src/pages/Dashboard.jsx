@@ -22,7 +22,6 @@ const Dashboard = ({ DarkThemeToggle }) => {
     apiClient
       .get(`/content/${currentUser._id}`)
       .then((res) => {
-        console.log(res.data.content);
         if (res.data.success) {
           setContentList(res.data.content);
           setSearchContent(res.data.content);
@@ -40,7 +39,6 @@ const Dashboard = ({ DarkThemeToggle }) => {
     apiClient
       .get(`/user/save/${currentUser._id}`)
       .then((res) => {
-        console.log(res);
         if (res.data.success) {
           setSavedContent(res.data.contents);
         } else {

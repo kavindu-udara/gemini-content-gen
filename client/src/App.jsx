@@ -8,6 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import Admin from "./pages/Admin";
+import AdminRoute from "./components/AdminRoute";
 
 function App({ DarkThemeToggle }) {
   return (
@@ -22,6 +24,9 @@ function App({ DarkThemeToggle }) {
             path="/dashboard/*"
             element={<Dashboard DarkThemeToggle={DarkThemeToggle} />}
           />
+          <Route element={<AdminRoute />} >
+            <Route path="/admin/*" element={<Admin/>}/>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
