@@ -3,7 +3,7 @@ import ContentTile from "./ContentTile";
 import { FaRegBookmark, FaAmazon } from "react-icons/fa";
 import { ImPinterest2 } from "react-icons/im";
 
-const ContentBox = ({ ContentList, geating, saved, saveContent }) => {
+const ContentBox = ({ ContentList, geating, saved, saveAndUnsave }) => {
 
   return (
     <div>
@@ -14,7 +14,7 @@ const ContentBox = ({ ContentList, geating, saved, saveContent }) => {
         {ContentList.map((content, index) => {
           return (
             <ContentTile
-            saveContent={saveContent}
+            saveAndUnsave={saveAndUnsave}
               key={index}
               image={content.image}
               title={

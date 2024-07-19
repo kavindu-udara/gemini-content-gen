@@ -69,6 +69,22 @@ const Dashboard = ({ DarkThemeToggle }) => {
     })
   }
 
+  const unsaveContent = async (contentId) => {
+    apiClient.post(`/user/unsave`, {
+      id: currentUser._id,
+      contentId: contentId
+    }).then((res) => {
+      if (res.data.success) {
+        toast.success(res.data.message);
+        getSavedContent();
+      } else {
+        toast.error(res.data.message);
+      }
+    }).catch((err) => {
+      toast.error(err.response.data.message);
+    })
+  }
+
   useEffect(() => {
     getContentList();
     getSavedContent();
@@ -124,7 +140,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
           })}
 
           <Route path="/profile" element={<Profile />} />
-          <Route path="/saved" element={<Bookmarks savedContent={savedContent}/>} />
+          <Route path="/saved" element={<Bookmarks unsaveContent={unsaveContent} savedContent={savedContent}/>} />
         </Route>
       </Routes>
     </>

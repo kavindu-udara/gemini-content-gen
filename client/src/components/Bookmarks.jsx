@@ -4,12 +4,12 @@ import { toast } from "react-toastify";
 import ContentBox from "./ContentBox";
 import ContentTile from "./ContentTile";
 
-const Bookmarks = ({savedContent}) => {
+const Bookmarks = ({savedContent, unsaveContent}) => {
 
   return (
     <div className="bg-gray-50 dark:bg-gray-700 overflow-y-auto h-full scroll-smooth">
       <div className=" bg-white dark:bg-gray-800  py-10  rounded-xl mb-10">
-        <ContentBox ContentList={savedContent} geating={"Saved"} saved={true} />
+        <ContentBox ContentList={savedContent} saveAndUnsave={unsaveContent} geating={"Saved"} saved={true} />
       </div>
     </div>
   );

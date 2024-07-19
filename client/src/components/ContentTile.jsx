@@ -7,7 +7,7 @@ import { ImPinterest2 } from "react-icons/im";
 import { BsStars } from "react-icons/bs";
 import { FaBookmark } from "react-icons/fa6";
 
-const ContentTile = ({ title, description, path, tools, saved, saveContent, id }) => {
+const ContentTile = ({ title, description, path, tools, saved, saveAndUnsave, id }) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate(path);
@@ -19,7 +19,7 @@ const ContentTile = ({ title, description, path, tools, saved, saveContent, id }
             <div className="bg-white p-3 rounded-full">
               <BsStars />
             </div>
-            <div className="flex bg-white p-3 rounded-full items-center cursor-pointer" onClick={() => saveContent(id)}>
+            <div className="flex bg-white p-3 rounded-full items-center cursor-pointer" onClick={() => saveAndUnsave(id)}>
               {saved ? <FaBookmark /> : <FaRegBookmark /> }
             </div>
           </div>

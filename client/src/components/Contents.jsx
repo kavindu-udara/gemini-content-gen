@@ -19,7 +19,7 @@ const Contents = ({ ContentList,saved, saveContent }) => {
   return (
     <div className="bg-gray-50 dark:bg-gray-700 overflow-y-auto h-full scroll-smooth">
       <div className=" bg-white dark:bg-gray-800  py-10  rounded-xl mb-10">
-        <ContentBox saveContent={saveContent} ContentList={ContentList} geating={geating} saved={saved} />
+        <ContentBox saveAndUnsave={saveContent} ContentList={ContentList} geating={geating} saved={saved} />
       </div>
     </div>
   );
