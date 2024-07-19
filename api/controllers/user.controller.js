@@ -18,7 +18,6 @@ export const getUser = async (req, res, next) => {
 }
 
 export const updateUser = async (req, res, next) => {
-    // const avatar =  req.body.avatar ? req.body.avatar : "";
     try {
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
@@ -106,6 +105,30 @@ export const getSavedContents = async (req, res, next) => {
             const contentIds = savedContents.map((content) => content.contentId);
             const contents = await Content.find({ _id: { $in: contentIds } });
             res.status(200).json({ success: true, contents });
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const unSaveContent = async (req, res, next) => {
+    const { id, contentId } = req.body;
+    try {
+        const currentUser = await User.findById(id);
+        if (!currentUser) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        } else {
+            const content = await Content.findById(contentId);
+            if (!content) {
+                return res.status(404).json({ success: false, message: 'Content not found' });
+            } else {
+                const saved = await Saved.findOneAndDelete({ userId: currentUser._id, contentId: content._id });
+                if (!saved) {
+                    return res.status(404).json({ success: false, message: 'Content not saved' });
+                } else {
+                    return res.status(200).json({ success: true, message: 'Unsaved successfully' });
+                }
+            }
         }
     } catch (error) {
         next(error);
