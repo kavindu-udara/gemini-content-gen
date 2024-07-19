@@ -74,24 +74,40 @@ export const updateUserPassword = async (req, res, next) => {
 
 export const saveContent = async (req, res, next) => {
     const { id, contentId } = req.body;
-    try{
+    try {
         const currentUser = await User.findById(id);
         if (!currentUser) {
             return next(errorHandler(404, "User not found"));
-        }else{
+        } else {
             const content = await Content.findById(contentId);
             if (!content) {
                 return next(errorHandler(404, "Content not found"));
-            }else{
+            } else {
                 const saved = new Saved({
-                    userId : currentUser._id,
-                    contentId : content._id
+                    userId: currentUser._id,
+                    contentId: content._id
                 });
                 await saved.save();
                 res.status(200).json({ success: true, message: 'Saved successfully' });
             }
         }
-    }catch(error){
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const getSavedContents = async (req, res, next) => {
+    const id = req.params.id;
+    try {
+        const savedContents = await Saved.find({ userId: id });
+        if (!savedContents) {
+            return next(errorHandler(404, "Saved contents not found"));
+        } else {
+            const contentIds = savedContents.map((content) => content.contentId);
+            const contents = await Content.find({ _id: { $in: contentIds } });
+            res.status(200).json({ success: true, contents });
+        }
+    } catch (error) {
         next(error);
     }
 }

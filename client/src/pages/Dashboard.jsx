@@ -39,11 +39,11 @@ const Dashboard = ({ DarkThemeToggle }) => {
 
   const getSavedContent = async () => {
     apiClient
-      .get("/content/saved")
+      .get(`/user/save/${currentUser._id}`)
       .then((res) => {
         console.log(res);
         if (res.data.success) {
-          setSavedContent(res.data.content);
+          setSavedContent(res.data.contents);
         } else {
           toast.error(res.data.message);
         }
@@ -60,7 +60,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
     }).then((res) => {
       if (res.data.success) {
         toast.success(res.data.message);
-        // getSavedContent();
+        getSavedContent();
       } else {
         toast.error(res.data.message);
       }
