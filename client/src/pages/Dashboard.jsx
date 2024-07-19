@@ -8,9 +8,11 @@ import apiClient from "../axios/axios";
 import { toast } from "react-toastify";
 import Bookmarks from "../components/Bookmarks";
 import Contents from "../components/Contents";
+import { useSelector } from "react-redux";
 
 const Dashboard = ({ DarkThemeToggle }) => {
   const navigate = useNavigate();
+  const {currentUser} = useSelector((state) => state.user);
   const [contentList, setContentList] = useState([]);
   const [search, setSearch] = useState(null);
   const [searchContent, setSearchContent] = useState(contentList);
@@ -51,6 +53,22 @@ const Dashboard = ({ DarkThemeToggle }) => {
       });
   };
 
+  const saveContent = async(contentId)=> {
+    apiClient.post(`/user/save`, {
+      id: currentUser._id,
+      contentId: contentId
+    }).then((res) => {
+      if (res.data.success) {
+        toast.success(res.data.message);
+        // getSavedContent();
+      } else {
+        toast.error(res.data.message);
+      }
+    }).catch((err) => {
+      toast.error(err.response.data.message);
+    })
+  }
+
   useEffect(() => {
     getContentList();
     getSavedContent();
@@ -83,7 +101,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
         >
           <Route
             path="/content"
-            element={<Contents ContentList={searchContent} />}
+            element={<Contents saveContent={saveContent} ContentList={searchContent} />}
           />
 
           {contentList.map((content, index) => {

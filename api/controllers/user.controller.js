@@ -1,6 +1,9 @@
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from "bcryptjs";
+import Content from "../models/content.model.js";
+import Saved from "../models/saved.model.js";
+
 export const getUser = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
@@ -66,5 +69,29 @@ export const updateUserPassword = async (req, res, next) => {
         res.status(200).json({ success: true, user: others, message: 'password updated successfully' });
     } catch (err) {
         next(err);
+    }
+}
+
+export const saveContent = async (req, res, next) => {
+    const { id, contentId } = req.body;
+    try{
+        const currentUser = await User.findById(id);
+        if (!currentUser) {
+            return next(errorHandler(404, "User not found"));
+        }else{
+            const content = await Content.findById(contentId);
+            if (!content) {
+                return next(errorHandler(404, "Content not found"));
+            }else{
+                const saved = new Saved({
+                    userId : currentUser._id,
+                    contentId : content._id
+                });
+                await saved.save();
+                res.status(200).json({ success: true, message: 'Saved successfully' });
+            }
+        }
+    }catch(error){
+        next(error);
     }
 }

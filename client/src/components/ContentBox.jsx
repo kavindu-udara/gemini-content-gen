@@ -3,7 +3,7 @@ import ContentTile from "./ContentTile";
 import { FaRegBookmark, FaAmazon } from "react-icons/fa";
 import { ImPinterest2 } from "react-icons/im";
 
-const ContentBox = ({ ContentList, geating, saved }) => {
+const ContentBox = ({ ContentList, geating, saved, saveContent }) => {
 
   return (
     <div>
@@ -14,6 +14,7 @@ const ContentBox = ({ ContentList, geating, saved }) => {
         {ContentList.map((content, index) => {
           return (
             <ContentTile
+            saveContent={saveContent}
               key={index}
               image={content.image}
               title={
@@ -29,6 +30,7 @@ const ContentBox = ({ ContentList, geating, saved }) => {
               path={`/dashboard/${content.type}`}
               tools={content.aiTool}
               saved={saved}
+              id={content._id}
             />
           );
         })}
