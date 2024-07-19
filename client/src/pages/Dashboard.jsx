@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import ContentBox from "../components/ContentBox";
 import Profile from "../components/Profile";
 import GenerateContent from "../components/GenerateContent";
 import apiClient from "../axios/axios";
@@ -12,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const Dashboard = ({ DarkThemeToggle }) => {
   const navigate = useNavigate();
-  const {currentUser} = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
   const [contentList, setContentList] = useState([]);
   const [search, setSearch] = useState(null);
   const [searchContent, setSearchContent] = useState(contentList);
@@ -21,7 +20,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
 
   const getContentList = async () => {
     apiClient
-      .get("/content")
+      .get(`/content/${currentUser._id}`)
       .then((res) => {
         console.log(res.data.content);
         if (res.data.success) {
@@ -53,37 +52,45 @@ const Dashboard = ({ DarkThemeToggle }) => {
       });
   };
 
-  const saveContent = async(contentId)=> {
-    apiClient.post(`/user/save`, {
-      id: currentUser._id,
-      contentId: contentId
-    }).then((res) => {
-      if (res.data.success) {
-        toast.success(res.data.message);
-        getSavedContent();
-      } else {
-        toast.error(res.data.message);
-      }
-    }).catch((err) => {
-      toast.error(err.response.data.message);
-    })
-  }
+  const saveContent = async (contentId) => {
+    apiClient
+      .post(`/user/save`, {
+        id: currentUser._id,
+        contentId: contentId,
+      })
+      .then((res) => {
+        if (res.data.success) {
+          toast.success(res.data.message);
+          getContentList();
+          getSavedContent();
+        } else {
+          toast.error(res.data.message);
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
 
   const unsaveContent = async (contentId) => {
-    apiClient.post(`/user/unsave`, {
-      id: currentUser._id,
-      contentId: contentId
-    }).then((res) => {
-      if (res.data.success) {
-        toast.success(res.data.message);
-        getSavedContent();
-      } else {
-        toast.error(res.data.message);
-      }
-    }).catch((err) => {
-      toast.error(err.response.data.message);
-    })
-  }
+    apiClient
+      .post(`/user/unsave`, {
+        id: currentUser._id,
+        contentId: contentId,
+      })
+      .then((res) => {
+        if (res.data.success) {
+          toast.success(res.data.message);
+          getContentList();
+          getSavedContent();
+        } else {
+          toast.error(res.data.message);
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
 
   useEffect(() => {
     getContentList();
@@ -117,7 +124,13 @@ const Dashboard = ({ DarkThemeToggle }) => {
         >
           <Route
             path="/content"
-            element={<Contents saveContent={saveContent} ContentList={searchContent} />}
+            element={
+              <Contents
+                saveContent={saveContent}
+                unsaveContent={unsaveContent}
+                ContentList={searchContent}
+              />
+            }
           />
 
           {contentList.map((content, index) => {
@@ -140,7 +153,16 @@ const Dashboard = ({ DarkThemeToggle }) => {
           })}
 
           <Route path="/profile" element={<Profile />} />
-          <Route path="/saved" element={<Bookmarks unsaveContent={unsaveContent} savedContent={savedContent}/>} />
+          <Route
+            path="/saved"
+            element={
+              <Bookmarks
+                saveContent={saveContent}
+                unsaveContent={unsaveContent}
+                savedContent={savedContent}
+              />
+            }
+          />
         </Route>
       </Routes>
     </>

@@ -104,7 +104,10 @@ export const getSavedContents = async (req, res, next) => {
         } else {
             const contentIds = savedContents.map((content) => content.contentId);
             const contents = await Content.find({ _id: { $in: contentIds } });
-            res.status(200).json({ success: true, contents });
+            const savedContent = contents.map((content) => {
+                return {...content._doc, isSaved: true};
+            })
+            res.status(200).json({ success: true, contents:savedContent, message: 'Success' });
         }
     } catch (error) {
         next(error);

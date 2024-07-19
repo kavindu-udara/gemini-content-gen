@@ -7,7 +7,7 @@ import { ImPinterest2 } from "react-icons/im";
 import { BsStars } from "react-icons/bs";
 import { FaBookmark } from "react-icons/fa6";
 
-const ContentTile = ({ title, description, path, tools, saved, saveAndUnsave, id }) => {
+const ContentTile = ({ title, description, path, tools, saveContent, unsaveContent, id, isSaved }) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate(path);
@@ -19,16 +19,16 @@ const ContentTile = ({ title, description, path, tools, saved, saveAndUnsave, id
             <div className="bg-white p-3 rounded-full">
               <BsStars />
             </div>
-            <div className="flex bg-white p-3 rounded-full items-center cursor-pointer" onClick={() => saveAndUnsave(id)}>
-              {saved ? <FaBookmark /> : <FaRegBookmark /> }
+            <div className="flex bg-white p-3 rounded-full items-center cursor-pointer">
+              {isSaved ? <FaBookmark onClick={() => unsaveContent(id)} /> : <FaRegBookmark onClick={() => saveContent(id)} /> }
             </div>
           </div>
           <div className="flex flex-row mt-5">
               <div className="text-3xl">{title}</div>
           </div>
           <div className="mt-5 flex gap-3 flex-wrap">
-            {tools.map((tool) => (
-              <button className="border rounded-full p-2 border-black">
+            {tools.map((tool, index) => (
+              <button key={index} className="border rounded-full p-2 border-black">
                 {tool}
               </button>
             ))}

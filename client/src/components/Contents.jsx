@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ContentBox from "./ContentBox";
 
-const Contents = ({ ContentList,saved, saveContent }) => {
+const Contents = ({ ContentList, saved, saveContent, unsaveContent }) => {
   const [geating, setGeating] = useState("");
 
   const today = new Date();
@@ -19,7 +19,13 @@ const Contents = ({ ContentList,saved, saveContent }) => {
   return (
     <div className="bg-gray-50 dark:bg-gray-700 overflow-y-auto h-full scroll-smooth">
       <div className=" bg-white dark:bg-gray-800  py-10  rounded-xl mb-10">
-        <ContentBox saveAndUnsave={saveContent} ContentList={ContentList} geating={geating} saved={saved} />
+        <ContentBox
+          saveContent={saveContent}
+          unsaveContent={unsaveContent}
+          ContentList={ContentList}
+          geating={geating}
+          saved={saved}
+        />
       </div>
     </div>
   );
