@@ -69,3 +69,17 @@ export const createContent = async (req, res, next) => {
         })
     }
 }
+
+export const updateContent = async (req, res, next) => {
+    const id = req.params.id;
+    try {
+      const updateContent = await Content.findByIdAndUpdate(id, req.body, { new: true });
+      if (!updateContent) {
+        return res.status(404).json({ success: false, message: "Content not found" });
+      }
+  
+      res.status(200).json({ success: true, content: updateContent, message: "Content updated successfully" });
+    } catch (error) {
+      next(error);
+    }
+  }

@@ -20,6 +20,10 @@ const contentSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    promt: {
+      type: String,
+      required: true,
+    },
     aiTool: {
       type: Array,
       required: true,

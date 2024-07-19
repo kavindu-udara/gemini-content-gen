@@ -4,7 +4,7 @@ import { verifyToken } from "../utils/verifyUser.js";
 
 const router = express.Router();
 
-router.post('/generate/:type',verifyToken, generate);
+router.post('/generate/:id',verifyToken, generate);
 
 // need to make
 router.post('/speechtotext',verifyToken, speechToText);

@@ -7,7 +7,7 @@ import { HiHome } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 
-const GenerateContent = ({ title, description, inputText, type, tools }) => {
+const GenerateContent = ({ title, description, inputText, type, tools, id }) => {
   const [promt, setPromt] = useState("");
   const [response, setResponse] = useState("hello");
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ const GenerateContent = ({ title, description, inputText, type, tools }) => {
       setLoading(true);
       setResponse("Please wait...");
       apiClient
-        .post(`/${model}/generate/${type}`, {
+        .post(`/${model}/generate/${id}`, {
           withCredentials: true,
           reqPrompt: promt,
         })

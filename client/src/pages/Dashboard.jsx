@@ -21,7 +21,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
     apiClient
       .get("/content")
       .then((res) => {
-        // setContentList(null);
+        console.log(res.data.content);
         if (res.data.success) {
           setContentList(res.data.content);
           setSearchContent(res.data.content);
@@ -98,6 +98,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
                     inputText={content.inputText}
                     type={content.type}
                     tools={content.aiTool}
+                    id={content._id}
                   />
                 }
               />
