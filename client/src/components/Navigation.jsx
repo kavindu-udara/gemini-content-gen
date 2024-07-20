@@ -13,7 +13,7 @@ import { Outlet, Route, Routes } from "react-router-dom";
 import { FaUser, FaPlus } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import { FaThList } from "react-icons/fa";
+import { FaThList, FaUsers } from "react-icons/fa";
 
 const Navigation = ({ DarkThemeToggle, search, setSearch }) => {
   const { currentUser } = useSelector((state) => state.user);
@@ -31,6 +31,10 @@ const Navigation = ({ DarkThemeToggle, search, setSearch }) => {
                 <NavButton
                   icon={<FaThList />}
                   path={"/dashboard/contents-list"}
+                />
+                <NavButton
+                  icon={<FaUsers />}
+                  path={"/dashboard/users-list"}
                 />
               </>
             )}

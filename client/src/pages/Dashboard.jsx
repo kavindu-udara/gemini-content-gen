@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import AdminRoute from "../components/AdminRoute";
 import AddNewContent from "../components/admin/AddNewContent";
 import ContentLists from "../components/admin/ContentLists";
+import Users from "../components/admin/Users";
 
 const Dashboard = ({ DarkThemeToggle }) => {
   const navigate = useNavigate();
@@ -202,6 +203,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
                 />
               }
             />
+            <Route path="/users-list" element={<Users/>}/>
           </Route>
         </Route>
       </Routes>

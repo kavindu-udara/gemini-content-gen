@@ -154,7 +154,7 @@ const Profile = () => {
       <div className="flex flex-col rounded-xl  py-10  bg-white dark:bg-gray-800 content-center md:justify-center md:items-center h-full">
         <div className="md:w-2/6 w-full bg-white dark:bg-gray-800 rounded-xl p-3 border">
           <form onSubmit={handleSubmit}>
-            <div className="bg-blue-100 dark:text-black rounded-xl p-5">
+            <div className="bg-blue-100 dark:bg-gray-700 dark:text-white rounded-xl p-5">
               <div className="text-3xl font-bold text-center mb-10">
                 Profile
               </div>

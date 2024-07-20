@@ -33,6 +33,7 @@ const ContentLists = ({
 
   const handleDelete = (content) => {
     // setSelectedContentId(content._id);
+    
     setSelectedContent(content);
     setDeleteContentModel(true);
   };
