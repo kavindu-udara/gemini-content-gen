@@ -20,6 +20,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
   const [searchContent, setSearchContent] = useState(contentList);
   const [loading, setLoading] = useState(false);
   const [savedContent, setSavedContent] = useState([]);
+  const [deleteContentModel, setDeleteContentModel] = useState(false);
 
   const getContentList = async () => {
     apiClient
@@ -93,6 +94,23 @@ const Dashboard = ({ DarkThemeToggle }) => {
       });
   };
 
+  const deleteContent = (selectedContentId) => {
+    apiClient
+      .post(`/admin/content/delete/${selectedContentId}`, {
+        id: currentUser._id,
+      })
+      .then((res) => {
+        res.data.success
+          ? toast.success(res.data.message)
+          : toast.error(res.data.message);
+          setDeleteContentModel(false);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        setDeleteContentModel(false);
+      });
+  };
+
   useEffect(() => {
     getContentList();
     getSavedContent();
@@ -110,6 +128,10 @@ const Dashboard = ({ DarkThemeToggle }) => {
       setSearchContent(contentList);
     }
   }, [search]);
+
+  useEffect(() => {
+    getContentList();
+  }, [deleteContent]);
 
   return (
     <>
@@ -166,7 +188,10 @@ const Dashboard = ({ DarkThemeToggle }) => {
           {/* admin routes */}
           <Route element={<AdminRoute />}>
             <Route path="/add-content" element={<AddNewContent />} />
-            <Route path="/contents-list" element={<ContentLists/>} />
+            <Route
+              path="/contents-list"
+              element={<ContentLists contentList={contentList} deleteContent={deleteContent} deleteContentModel={deleteContentModel} setDeleteContentModel={setDeleteContentModel} />}
+            />
           </Route>
         </Route>
       </Routes>

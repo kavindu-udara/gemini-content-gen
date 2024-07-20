@@ -84,3 +84,17 @@ export const updateContent = async (req, res, next) => {
       next(error);
     }
   }
+
+  export const deleteContent = async (req, res, next) => {
+    const id = req.params.id;
+    try {
+      const deleteContent = await Content.findByIdAndDelete(id);
+      if (!deleteContent) {
+        return res.status(404).json({ success: false, message: "Content not found" });
+      }
+  
+      res.status(200).json({ success: true, message: "Content deleted successfully" });
+    } catch (error) {
+      next(error);
+    }
+  }
