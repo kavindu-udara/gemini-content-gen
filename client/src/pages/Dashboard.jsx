@@ -21,6 +21,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
   const [loading, setLoading] = useState(false);
   const [savedContent, setSavedContent] = useState([]);
   const [deleteContentModel, setDeleteContentModel] = useState(false);
+  const [editContentModel, setEditContentModel] = useState(false);
 
   const getContentList = async () => {
     apiClient
@@ -103,7 +104,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
         res.data.success
           ? toast.success(res.data.message)
           : toast.error(res.data.message);
-          setDeleteContentModel(false);
+        setDeleteContentModel(false);
       })
       .catch((err) => {
         toast.error(err.message);
@@ -190,7 +191,16 @@ const Dashboard = ({ DarkThemeToggle }) => {
             <Route path="/add-content" element={<AddNewContent />} />
             <Route
               path="/contents-list"
-              element={<ContentLists contentList={contentList} deleteContent={deleteContent} deleteContentModel={deleteContentModel} setDeleteContentModel={setDeleteContentModel} />}
+              element={
+                <ContentLists
+                  contentList={contentList}
+                  deleteContent={deleteContent}
+                  deleteContentModel={deleteContentModel}
+                  setDeleteContentModel={setDeleteContentModel}
+                  editContentModel={editContentModel}
+                  setEditContentModel={setEditContentModel}
+                />
+              }
             />
           </Route>
         </Route>

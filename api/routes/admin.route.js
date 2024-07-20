@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/signin', signin);
 router.post('/content/create', verifyToken, verifyAdmin, createContent);
-router.put('/content/update/:id', verifyToken, updateContent);
+router.put('/content/update/:id', verifyToken,verifyAdmin, updateContent);
 router.post('/content/delete/:id', verifyToken, verifyAdmin, deleteContent);
 
 export default router;

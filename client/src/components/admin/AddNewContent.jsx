@@ -4,9 +4,9 @@ import apiClient from "../../axios/axios";
 import { useSelector } from "react-redux";
 
 const AddNewContent = () => {
-  const [tools, setTools] = useState(["Gemini", "Groq"]);
+  const [tools, setTools] = useState(["gemini", "groq"]);
   const [selectedTools, setSelectedTools] = useState([]);
-  const {currentUser} = useSelector(state => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   // inputs
   const [title, setTitle] = useState("");
@@ -14,48 +14,70 @@ const AddNewContent = () => {
   const [inputText, setInputText] = useState("");
   const [type, setType] = useState("");
   const [promt, setPromt] = useState("");
-  
+
   const createContent = () => {
-    if(selectedTools.length === 0){
-        toast.error("Please select at least one tool")
-    }else{
-      apiClient.post('admin/content/create', {
-        id: currentUser._id,
-        title,
-        description,
-        inputText,
-        type,
-        promt,
-        tools: selectedTools
-      }).then((res) => {
-        res.data.sucess ? toast.success(res.data.message) : toast.error(res.data.message);
-        console.log(res);
-      }).catch((err) => {
-        toast.error(err.message);
-        console.log(err);
-      });
+    if (selectedTools.length === 0) {
+      toast.error("Please select at least one tool");
+    } else {
+      apiClient
+        .post("admin/content/create", {
+          id: currentUser._id,
+          title,
+          description,
+          inputText,
+          type,
+          promt,
+          tools: selectedTools,
+        })
+        .then((res) => {
+          if (res.data.success) {
+            toast.success(res.data.message);
+            resetForm();
+          } else {
+            toast.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
     }
-  }
+  };
+
+  const resetForm = () => {
+    setTitle("");
+    setDescription("");
+    setInputText("");
+    setType("");
+    setPromt("");
+    setSelectedTools([]);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     createContent();
-  }
+  };
 
   return (
     <div className="bg-gray-50 dark:text-white dark:bg-gray-700 h-full overflow-y-auto scroll-smooth mb-10">
       <div className=" bg-white dark:bg-gray-800 rounded-xl py-10 mb-10">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-10  mx-5 mt-5 mb-10">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-10  mx-5 mt-5 mb-10"
+        >
           <div className="basis-1/3 rounded-xl border  p-2">
             <div className="rounded-xl bg-blue-100 dark:bg-gray-700 p-5">
-              <button disabled type="button" className="bg-white dark:text-black rounded-full mb-5 p-3 text-xl">
+              <button
+                disabled
+                type="button"
+                className="bg-white dark:text-black rounded-full mb-5 p-3 text-xl"
+              >
                 Add new Content
               </button>
               <div className="mb-3">
                 <div className="text-lg">Title</div>
                 <input
-                value={title}
-                onChange={e => setTitle(e.target.value)}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   type="text"
                   className="focus:ring-0 rounded-lg dark:bg-gray-600 border-none w-full text-lg"
                   required
@@ -64,8 +86,8 @@ const AddNewContent = () => {
               <div className="mb-3">
                 <div className="text-lg">Description</div>
                 <input
-                value={description}
-                onChange={e => setDescription(e.target.value)}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   type="text"
                   className="focus:ring-0 rounded-lg dark:bg-gray-600 border-none w-full text-lg"
                   required
@@ -74,8 +96,8 @@ const AddNewContent = () => {
               <div className="mb-3">
                 <div className="text-lg">Input text</div>
                 <input
-                value={inputText}
-                onChange={e => setInputText(e.target.value)}
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
                   type="text"
                   className="focus:ring-0 rounded-lg dark:bg-gray-600 border-none w-full text-lg"
                   required
@@ -84,8 +106,8 @@ const AddNewContent = () => {
               <div className="mb-3">
                 <div className="text-lg">Type</div>
                 <input
-                value={type}
-                onChange={e => setType(e.target.value)}
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
                   type="text"
                   className="focus:ring-0 rounded-lg dark:bg-gray-600 border-none w-full text-lg"
                   required
@@ -94,8 +116,8 @@ const AddNewContent = () => {
               <div className="mb-3">
                 <div className="text-lg">Promt</div>
                 <input
-                value={promt}
-                onChange={e => setPromt(e.target.value)}
+                  value={promt}
+                  onChange={(e) => setPromt(e.target.value)}
                   type="text"
                   className="focus:ring-0 rounded-lg dark:bg-gray-600 border-none w-full text-lg"
                   required
@@ -105,7 +127,7 @@ const AddNewContent = () => {
                 <div className="text-lg mb-2">Select AI tool</div>
                 {tools.map((tool) => (
                   <button
-                  type="button"
+                    type="button"
                     key={tool}
                     onClick={
                       selectedTools.includes(tool)
@@ -130,7 +152,10 @@ const AddNewContent = () => {
                 ))}
               </div>
             </div>
-            <button type="submit" className="rounded-full dark:bg-gray-700 dark:disabled:bg-gray-600 bg-blue-100 disabled:bg-blue-50  p-3  my-5 ml-3 text-lg text-left hover:bg-blue-200">
+            <button
+              type="submit"
+              className="rounded-full dark:bg-gray-700 dark:disabled:bg-gray-600 bg-blue-100 disabled:bg-blue-50  p-3  my-5 ml-3 text-lg text-left hover:bg-blue-200"
+            >
               <span>Create content</span>
             </button>
           </div>

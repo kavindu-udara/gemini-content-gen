@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Modal } from "flowbite-react";
+import React, { useEffect } from "react";
+import { Button, Modal, Checkbox, Label, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import apiClient from "../../axios/axios";
@@ -11,13 +11,74 @@ const ContentLists = ({
   deleteContent,
   deleteContentModel,
   setDeleteContentModel,
+  editContentModel,
+  setEditContentModel,
 }) => {
-  const [selectedContentId, setSelectedContentId] = useState(null);
+  const [selectedContent, setSelectedContent] = useState(null);
 
-  const handleDelete = (contentId) => {
-    setSelectedContentId(contentId);
+  const [title, setTitle] = useState(selectedContent?.title || "");
+  const [description, setDescription] = useState(
+    selectedContent?.description || ""
+  );
+  const [inputText, setInputText] = useState(selectedContent?.inputText || "");
+  const [type, setType] = useState(selectedContent?.type || "");
+  const [promt, setPromt] = useState(selectedContent?.promt || "");
+  const [tools, setTools] = useState(["gemini", "groq"]);
+  const [selectedTools, setSelectedTools] = useState(
+    selectedContent?.aiTool || []
+  );
+  const {currentUser} = useSelector(state => state.user);
+
+  console.log(selectedContent);
+
+  const handleDelete = (content) => {
+    // setSelectedContentId(content._id);
+    setSelectedContent(content);
     setDeleteContentModel(true);
   };
+
+  const handleEditContent = (selectedContent) => {
+    // setSelectedContentId(contentId);
+    // setSelectedContent(content);
+    setSelectedContent(
+      contentList.find((content) => content === selectedContent)
+    );
+    setEditContentModel(true);
+  };
+
+  const updateContent = () => {
+    apiClient.put(`/admin/content/update/${selectedContent._id}`,{
+      id: currentUser._id,
+      title,
+      description,
+      inputText,
+      type,
+      promt,
+      aiTool:selectedTools
+    }).then((res) => {
+      toast.success(res.data.message);
+      setEditContentModel(false);
+    }).catch((err) => {
+      toast.error(err.message);
+      setEditContentModel(false);
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    selectedTools.length == 0
+      ? toast.error("Please select at least one tool")
+      : updateContent();
+  };
+
+  useEffect(() => {
+    setTitle(selectedContent?.title || "");
+    setDescription(selectedContent?.description || "");
+    setInputText(selectedContent?.inputText || "");
+    setType(selectedContent?.type || "");
+    setPromt(selectedContent?.promt || "");
+    setSelectedTools(selectedContent?.aiTool || []);
+  }, [selectedContent]);
 
   return (
     <>
@@ -83,6 +144,7 @@ const ContentLists = ({
                       </td>
                       <td>
                         <button
+                          onClick={() => handleEditContent(content)}
                           type="button"
                           className={
                             "bg-blue-200 hover:bg-blue-300 py-1 px-2 text-black rounded-full mr-3  "
@@ -91,7 +153,7 @@ const ContentLists = ({
                           Edit
                         </button>
                         <button
-                          onClick={() => handleDelete(content._id)}
+                          onClick={() => handleDelete(content)}
                           type="button"
                           className={
                             "bg-red-500 hover:bg-red-600 py-1 px-2 text-white rounded-full mr-3"
@@ -109,6 +171,7 @@ const ContentLists = ({
         </div>
       </div>
 
+      {/* delete content model */}
       <Modal
         show={deleteContentModel}
         size="md"
@@ -125,7 +188,7 @@ const ContentLists = ({
             <div className="flex justify-center gap-4">
               <Button
                 color="failure"
-                onClick={() => deleteContent(selectedContentId)}
+                onClick={() => deleteContent(selectedContent._id)}
               >
                 {"Yes, I'm sure"}
               </Button>
@@ -134,6 +197,112 @@ const ContentLists = ({
               </Button>
             </div>
           </div>
+        </Modal.Body>
+      </Modal>
+
+      {/* edit content model */}
+      <Modal
+        show={editContentModel}
+        onClose={() => setEditContentModel(false)}
+        size="md"
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+              Edit content
+            </h3>
+            <div className="bg-blue-200 rounded-xl p-3">
+              <div className="mt-3">
+                <div>Title</div>
+                <input
+                  type="text"
+                  className="rounded-xl w-full border-none"
+                  required
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+              <div className="mt-3">
+                <div>Description</div>
+                <input
+                  type="text"
+                  className="rounded-xl w-full border-none"
+                  required
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+              <div className="mt-3">
+                <div>Input text</div>
+                <input
+                  type="text"
+                  className="rounded-xl w-full border-none"
+                  required
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                />
+              </div>
+              <div className="mt-3">
+                <div>Type</div>
+                <input
+                  type="text"
+                  className="rounded-xl w-full border-none"
+                  required
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                />
+              </div>
+              <div className="mt-3">
+                <div>Promt</div>
+                <input
+                  type="text"
+                  className="rounded-xl w-full border-none"
+                  required
+                  value={promt}
+                  onChange={(e) => setPromt(e.target.value)}
+                />
+              </div>
+              <div className="mt-3">
+                <div>AI tool</div>
+                {tools.map((tool) => (
+                  <button
+                    type="button"
+                    key={tool}
+                    onClick={
+                      selectedTools.includes(tool)
+                        ? () =>
+                            setSelectedTools(
+                              selectedTools.filter(
+                                (selectedTool) => selectedTool !== tool
+                              )
+                            )
+                        : () => setSelectedTools([...selectedTools, tool])
+                    }
+                    className={
+                      selectedTools.some(
+                        (selectedTool) => selectedTool === tool
+                      )
+                        ? "bg-black text-white p-3 rounded-full mr-3  border border-black"
+                        : " p-3 rounded-full dark:border-white border border-black mr-3"
+                    }
+                  >
+                    {tool}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="w-full">
+              <button
+                type="submit"
+                className="w-full bg-black text-white rounded-full p-3 disabled:opacity-80"
+              >
+                Save changes
+              </button>
+            </div>
+          </form>
         </Modal.Body>
       </Modal>
     </>
