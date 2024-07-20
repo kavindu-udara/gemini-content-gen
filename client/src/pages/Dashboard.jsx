@@ -8,6 +8,9 @@ import { toast } from "react-toastify";
 import Bookmarks from "../components/Bookmarks";
 import Contents from "../components/Contents";
 import { useSelector } from "react-redux";
+import AdminRoute from "../components/AdminRoute";
+import AddNewContent from "../components/admin/AddNewContent";
+import ContentLists from "../components/admin/ContentLists";
 
 const Dashboard = ({ DarkThemeToggle }) => {
   const navigate = useNavigate();
@@ -149,7 +152,6 @@ const Dashboard = ({ DarkThemeToggle }) => {
               />
             );
           })}
-
           <Route path="/profile" element={<Profile />} />
           <Route
             path="/saved"
@@ -161,6 +163,11 @@ const Dashboard = ({ DarkThemeToggle }) => {
               />
             }
           />
+          {/* admin routes */}
+          <Route element={<AdminRoute />}>
+            <Route path="/add-content" element={<AddNewContent />} />
+            <Route path="/contents-list" element={<ContentLists/>} />
+          </Route>
         </Route>
       </Routes>
     </>

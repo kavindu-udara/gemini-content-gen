@@ -8,7 +8,6 @@ import {
   signInSuccess,
   signInFailure,
 } from "../redux/user/userSlice";
-import { adminSignInStart, adminSignInSuccess } from "../redux/admin/adminSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 
@@ -19,7 +18,6 @@ const SignIn = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [loading, setLoading] = useState((state) => state.user);
   const { loading, error } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -45,18 +43,10 @@ const SignIn = () => {
             })
             .then((res) => {
               if (res.data.success) {
-                console.log(res.data.user);
-                // if(res.data.user.role === "admin"){
-                //   dispatch(adminSignInSuccess(res.data));
-                //   dispatch(signInSuccess(res.data));
-                //   navigate("/admin/contents");
-                //   return;
-                // }
                 dispatch(signInSuccess(res.data));
                 navigate("/dashboard/content");
                 return;
               }
-              // console.log(res);
               dispatch(signInFailure(res.data.message));
             })
             .catch((err) => {

@@ -48,13 +48,14 @@ export const signin = async (req, res, next) => {
 }
 
 export const createContent = async (req, res, next) => {
-    const {title, description, inputText, type, aiTool} = req.body;
+    const {title, description, inputText, type, tools, promt} = req.body;
     const newContent = new Content({
         title,
         description,
         inputText,
         type,
-        aiTool
+        promt,
+        aiTool:tools
     });
     try {
         await newContent.save();
