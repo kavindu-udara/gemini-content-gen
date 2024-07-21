@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { Button, Navbar } from "flowbite-react";
-import { BsArrowRightShort } from "react-icons/bs";
-import { IoMdPerson } from "react-icons/io";
+import React from "react";
+import { Navbar } from "flowbite-react";
 import { IoSearchOutline, IoNotificationsOutline } from "react-icons/io5";
 
 const Header = ({ DarkThemeToggle, search, setSearch }) => {

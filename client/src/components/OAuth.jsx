@@ -17,7 +17,6 @@ const OAuth = () => {
     const auth = getAuth(app);
     // popup signin
     const result = await signInWithPopup(auth, provider);
-    // console.log(result);
     apiClient.post("/auth/google", {
       name: result.user.displayName,
       email: result.user.email,

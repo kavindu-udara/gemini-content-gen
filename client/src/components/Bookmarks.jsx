@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
-import apiClient from "../axios/axios";
-import { toast } from "react-toastify";
+import React from "react";
 import ContentBox from "./ContentBox";
-import ContentTile from "./ContentTile";
 
 const Bookmarks = ({savedContent,saveContent, unsaveContent}) => {
 

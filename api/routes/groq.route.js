@@ -6,7 +6,4 @@ const router = express.Router();
 
 router.post('/generate/:id',verifyToken, generate);
 
-// need to make
-router.post('/speechtotext',verifyToken, speechToText);
-
 export default router;

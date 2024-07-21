@@ -8,7 +8,7 @@ import {
   updateUserSuccess,
   updateUserFailure,
 } from "../redux/user/userSlice";
-import { Button, Modal, Progress } from "flowbite-react";
+import { Modal, Progress } from "flowbite-react";
 import {
   getStorage,
   uploadBytesResumable,
@@ -49,7 +49,6 @@ const Profile = () => {
       apiClient
         .post(`/user/update/${currentUser._id}`, formData)
         .then((res) => {
-          console.log(res);
           if (res.data.success) {
             dispatch(updateUserSuccess(res.data));
             toast.success(res.data.message);
@@ -58,7 +57,6 @@ const Profile = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
           dispatch(updateUserFailure(err));
         });
     };
@@ -76,7 +74,6 @@ const Profile = () => {
           newPassword: newPassword,
         })
         .then((res) => {
-          console.log(res);
           if (res.data.success) {
             toast.success(res.data.message);
             setOpenModal(false);
@@ -127,7 +124,6 @@ const Profile = () => {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("upload is " + progress + "% done");
         setProgress(Math.round(progress));
       },
       (error) => {

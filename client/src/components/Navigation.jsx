@@ -1,19 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import NavButton from "./NavButton";
-import { IoHomeOutline } from "react-icons/io5";
-import { FaHistory } from "react-icons/fa";
-import { BiLibrary } from "react-icons/bi";
-import { IoIosSettings, IoIosHome, IoIosFiling } from "react-icons/io";
+import { IoIosHome } from "react-icons/io";
 import Header from "./Header";
-import ContentTile from "./ContentTile";
 
-import { Progress } from "flowbite-react";
-import GenerateContent from "./GenerateContent";
-import { Outlet, Route, Routes } from "react-router-dom";
-import { FaUser, FaPlus } from "react-icons/fa";
+import { Outlet } from "react-router-dom";
+import { FaUser, FaPlus,FaThList, FaUsers  } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import { FaThList, FaUsers } from "react-icons/fa";
 
 const Navigation = ({ DarkThemeToggle, search, setSearch }) => {
   const { currentUser } = useSelector((state) => state.user);

@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, Navbar } from "flowbite-react";
-import { BsArrowRightShort } from "react-icons/bs";
+import { Navbar } from "flowbite-react";
 const HomeHeader = ({DarkThemeToggle}) => {
   return (
     <div>
@@ -10,7 +9,6 @@ const HomeHeader = ({DarkThemeToggle}) => {
             ContentGen
           </span>
         </Navbar.Brand>
-
         <div className="flex md:order-2">
           <div className="md:ml-5">{DarkThemeToggle}</div>
         </div>

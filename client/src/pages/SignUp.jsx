@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import { FaGoogle } from "react-icons/fa";
+import { Label, TextInput } from "flowbite-react";
 import { toast } from "react-toastify";
 // import axios from "axios";
 import apiClient  from "../axios/axios";
 import OAuth from "../components/OAuth";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -22,7 +21,6 @@ const SignUp = () => {
         password
       }).then((res) => {
         res.data.success ? toast.success(res.data.message) : toast.error(res.data.message);
-        console.log(res);
       }).catch((err) => {
         console.log(err);
       });

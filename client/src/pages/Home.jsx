@@ -1,12 +1,9 @@
 import React from "react";
-import {  Card, Checkbox, Label, TextInput } from "flowbite-react";
 import HomeHeader from "../components/HomeHeader";
-import { BsArrowRightShort } from "react-icons/bs";
 import HomeTile from "../components/HomeTile";
 import { MdDevices } from "react-icons/md";
 import { LuSettings2 } from "react-icons/lu";
-import { FaUsers } from "react-icons/fa6";
-import { FaRegComments } from "react-icons/fa6";
+import { FaRegComments, FaUsers } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 const Home = ({DarkThemeToggle}) => {
   return (

@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ContentTile from "./ContentTile";
-import { FaRegBookmark, FaAmazon } from "react-icons/fa";
-import { ImPinterest2 } from "react-icons/im";
 
 const ContentBox = ({ ContentList, geating, saved, saveContent, unsaveContent }) => {
-
   return (
     <div>
       <div className="text-4xl text-gray-600 ml-5 my-5 dark:text-white">

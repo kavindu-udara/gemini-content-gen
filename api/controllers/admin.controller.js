@@ -8,20 +8,20 @@ export const signin = async (req, res, next) => {
     const { email, password } = req.body;
     try {
         const validAdmin = await User.findOne({ email });
-        if(!validAdmin) {
+        if (!validAdmin) {
             return res.status(200).json({
                 success: false,
                 message: "user not found",
             });
-        }else{
-            if(validAdmin.role == "admin") {
+        } else {
+            if (validAdmin.role == "admin") {
                 const validPassword = bcryptjs.compareSync(password, validAdmin.password);
-                if(!validPassword) {
+                if (!validPassword) {
                     return res.status(200).json({
                         success: false,
                         message: "invalid password",
                     });
-                }else{
+                } else {
                     const token = jwt.sign({
                         id: validAdmin._id,
                     }, process.env.JWT_SECRET);
@@ -32,7 +32,7 @@ export const signin = async (req, res, next) => {
                         message: 'admin logged in successfully',
                     });
                 }
-            }else{
+            } else {
                 return res.status(200).json({
                     success: false,
                     message: "you are not an admin",
@@ -48,14 +48,14 @@ export const signin = async (req, res, next) => {
 }
 
 export const createContent = async (req, res, next) => {
-    const {title, description, inputText, type, tools, promt} = req.body;
+    const { title, description, inputText, type, tools, promt } = req.body;
     const newContent = new Content({
         title,
         description,
         inputText,
         type,
         promt,
-        aiTool:tools
+        aiTool: tools
     });
     try {
         await newContent.save();
@@ -63,55 +63,52 @@ export const createContent = async (req, res, next) => {
             success: true,
             message: 'content created successfully',
         });
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: err.message,
-        })
+    } catch (error) {
+        next(error);
     }
 }
 
 export const updateContent = async (req, res, next) => {
     const id = req.params.id;
     try {
-      const updateContent = await Content.findByIdAndUpdate(id, req.body, { new: true });
-      if (!updateContent) {
-        return res.status(404).json({ success: false, message: "Content not found" });
-      }
-  
-      res.status(200).json({ success: true, content: updateContent, message: "Content updated successfully" });
-    } catch (error) {
-      next(error);
-    }
-  }
+        const updateContent = await Content.findByIdAndUpdate(id, req.body, { new: true });
+        if (!updateContent) {
+            return res.status(404).json({ success: false, message: "Content not found" });
+        }
 
-  export const deleteContent = async (req, res, next) => {
-    const id = req.params.id;
-    try {
-      const deleteContent = await Content.findByIdAndDelete(id);
-      if (!deleteContent) {
-        return res.status(404).json({ success: false, message: "Content not found" });
-      }
-  
-      res.status(200).json({ success: true, message: "Content deleted successfully" });
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  export const getUsers = async (req, res, next) => {
-    try {
-        const users = await User.find();
-        
-        res.status(200).json({ success: true, users, message: 'Success' });
+        res.status(200).json({ success: true, content: updateContent, message: "Content updated successfully" });
     } catch (error) {
         next(error);
     }
-  }
+}
 
-  export const editUser = async (req, res, next) => {
+export const deleteContent = async (req, res, next) => {
+    const id = req.params.id;
+    try {
+        const deleteContent = await Content.findByIdAndDelete(id);
+        if (!deleteContent) {
+            return res.status(404).json({ success: false, message: "Content not found" });
+        }
+
+        res.status(200).json({ success: true, message: "Content deleted successfully" });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const getUsers = async (req, res, next) => {
+    try {
+        const users = await User.find();
+        const { password, ...others } = users._doc;
+        res.status(200).json({ success: true, users: others, message: 'Success' });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const editUser = async (req, res, next) => {
     const userId = req.params.userid;
-    const {username, email,role} = req.body;
+    const { username, email, role } = req.body;
     try {
         const updateUser = await User.findByIdAndUpdate(userId, {
             $set: {
@@ -120,26 +117,26 @@ export const updateContent = async (req, res, next) => {
                 role
             }
         }, { new: true });
-        if(!updateUser) {
+        if (!updateUser) {
             return res.status(404).json({ success: false, message: "User not found" });
-        }else{
+        } else {
             res.status(200).json({ success: true, user: updateUser, message: 'User updated successfully' });
         }
     } catch (error) {
         next(error);
     }
-  }
+}
 
-  export const deleteUser = async (req, res, next) => {
+export const deleteUser = async (req, res, next) => {
     const id = req.params.userid;
     try {
-        const deleteUser =await User.findByIdAndDelete(id);
-        if(!deleteUser) {
+        const deleteUser = await User.findByIdAndDelete(id);
+        if (!deleteUser) {
             return res.status(404).json({ success: false, message: "User not found" });
-        }else{
+        } else {
             res.status(200).json({ success: true, message: 'User deleted successfully' });
         }
     } catch (error) {
         next(error);
     }
-  }
+}

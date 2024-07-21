@@ -9,6 +9,7 @@ import groqRouter from "./routes/groq.route.js";
 import contentRouter from "./routes/content.route.js";
 import adminRouter from "./routes/admin.route.js";
 import mongoose from "mongoose";
+import path from "path";
 
 dotenv.config();
 

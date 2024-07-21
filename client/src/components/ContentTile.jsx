@@ -1,9 +1,6 @@
 import React from "react";
-import { Card } from "flowbite-react";
-import { FcStart } from "react-icons/fc";
-import { NavLink, useNavigate } from "react-router-dom";
-import { FaRegBookmark, FaAmazon } from "react-icons/fa";
-import { ImPinterest2 } from "react-icons/im";
+import { useNavigate } from "react-router-dom";
+import { FaRegBookmark } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
 import { FaBookmark } from "react-icons/fa6";
 

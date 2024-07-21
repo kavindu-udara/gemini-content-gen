@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Spinner, Clipboard, Breadcrumb } from "flowbite-react";
+import { Spinner, Clipboard, Breadcrumb } from "flowbite-react";
 import apiClient from "../axios/axios";
 import Markdown from "react-markdown";
 import { createRoot } from "react-dom/client";
@@ -7,7 +7,7 @@ import { HiHome } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 
-const GenerateContent = ({ title, description, inputText, type, tools, id }) => {
+const GenerateContent = ({ title, description, inputText, tools, id }) => {
   const [promt, setPromt] = useState("");
   const [response, setResponse] = useState("hello");
   const [loading, setLoading] = useState(false);
@@ -35,11 +35,9 @@ const GenerateContent = ({ title, description, inputText, type, tools, id }) => 
         })
         .then((res) => {
           setResponse(res.data.response);
-          console.log(res.data);
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err.message);
           setLoading(false);
         });
     }
@@ -99,7 +97,6 @@ const GenerateContent = ({ title, description, inputText, type, tools, id }) => 
                 ))}
               </div>
             </div>
-
             <button
               onClick={() => Generate()}
               disabled={loading}
@@ -117,7 +114,6 @@ const GenerateContent = ({ title, description, inputText, type, tools, id }) => 
               </span>
             </button>
           </div>
-
           <div className="basis-2/3 rounded-xl p-3 border text-lg">
             <div className=" flex flex-row justify-between mx-5 my-3 items-center">
               <div className="font-semibold text-xl">Result</div>
@@ -125,7 +121,6 @@ const GenerateContent = ({ title, description, inputText, type, tools, id }) => 
                 <Clipboard className="bg-black rounded-full" valueToCopy={response} label="Copy" />
               </div>
             </div>
-
             <div className="bg-blue-100 dark:bg-gray-700 rounded-xl p-5 mb-10">
               <div style={codeStyles}>
                 <div id="markdown"></div>

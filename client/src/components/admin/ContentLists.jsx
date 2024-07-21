@@ -29,18 +29,12 @@ const ContentLists = ({
   );
   const {currentUser} = useSelector(state => state.user);
 
-  console.log(selectedContent);
-
   const handleDelete = (content) => {
-    // setSelectedContentId(content._id);
-    
     setSelectedContent(content);
     setDeleteContentModel(true);
   };
 
   const handleEditContent = (selectedContent) => {
-    // setSelectedContentId(contentId);
-    // setSelectedContent(content);
     setSelectedContent(
       contentList.find((content) => content === selectedContent)
     );

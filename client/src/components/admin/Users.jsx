@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../../axios/axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Button, Modal, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Modal} from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const Users = () => {
@@ -29,7 +29,6 @@ const Users = () => {
       })
       .catch((error) => {
         toast.error(error.response.data.message);
-        console.log(error);
       });
   };
 
@@ -52,7 +51,6 @@ const Users = () => {
       })
       .catch((error) => {
         toast.error(error.response.data.message);
-        console.log(error);
       });
   };
 

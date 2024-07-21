@@ -19,7 +19,6 @@ const Dashboard = ({ DarkThemeToggle }) => {
   const [contentList, setContentList] = useState([]);
   const [search, setSearch] = useState(null);
   const [searchContent, setSearchContent] = useState(contentList);
-  const [loading, setLoading] = useState(false);
   const [savedContent, setSavedContent] = useState([]);
   const [deleteContentModel, setDeleteContentModel] = useState(false);
   const [editContentModel, setEditContentModel] = useState(false);
