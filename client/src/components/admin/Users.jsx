@@ -198,14 +198,14 @@ const Users = () => {
             <h3 className="text-xl font-medium text-gray-900 dark:text-white">
               Edit user
             </h3>
-            <div className="bg-blue-200 rounded-xl p-3">
+            <div className="bg-blue-200 dark:bg-gray-800 dark:text-white rounded-xl p-3">
               <div className="mt-3">
                 <div>Username</div>
                 <input
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   type="text"
-                  className="rounded-xl w-full border-none"
+                  className="rounded-xl w-full border-none dark:bg-gray-700"
                   required
                 />
               </div>
@@ -215,7 +215,7 @@ const Users = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
-                  className="rounded-xl w-full border-none"
+                  className="rounded-xl w-full border-none dark:bg-gray-700"
                   required
                 />
               </div>

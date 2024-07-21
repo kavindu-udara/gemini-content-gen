@@ -239,7 +239,7 @@ const Profile = () => {
           <Modal.Body>
             <div className="space-y-6 flex justify-center">
               <div className="border dark:bg-gray-600 p-3 rounded-xl">
-                <div className="bg-blue-100 dark:text-black rounded-xl p-3">
+                <div className="bg-blue-100 dark:bg-gray-800 dark:text-white rounded-xl p-3">
                   <div className=" mb-3">
                     <label htmlFor="">Current Password</label>
                     <input
@@ -249,7 +249,7 @@ const Profile = () => {
                       className="w-full border-none rounded-lg dark:bg-gray-600 dark:text-white"
                     />
                   </div>
-                  <div className="dark:text-black mb-3">
+                  <div className=" mb-3">
                     <label htmlFor="">New Password</label>
                     <input
                       value={newPassword}
@@ -258,7 +258,7 @@ const Profile = () => {
                       className="w-full rounded-lg border-none dark:bg-gray-600 dark:text-white"
                     />
                   </div>
-                  <div className="dark:text-black mb-3">
+                  <div className=" mb-3">
                     <label htmlFor="">Confirm Password</label>
                     <input
                       value={confirmPassword}
