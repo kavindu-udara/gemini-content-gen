@@ -108,3 +108,26 @@ export const updateContent = async (req, res, next) => {
         next(error);
     }
   }
+
+  export const editUser = async (req, res, next) => {
+    const userId = req.params.userid;
+    console.log(req.body);
+    console.log(userId);
+    const {username, email,role} = req.body;
+    try {
+        const updateUser = await User.findByIdAndUpdate(userId, {
+            $set: {
+                username,
+                email,
+                role
+            }
+        }, { new: true });
+        if(!updateUser) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }else{
+            res.status(200).json({ success: true, user: updateUser, message: 'User updated successfully' });
+        }
+    } catch (error) {
+        next(error);
+    }
+  }
