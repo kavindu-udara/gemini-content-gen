@@ -24,7 +24,6 @@ const __dirname = path.resolve();
 
 const app = express();
 
-// Set up CORS options
 const corsOptions = {
     origin: 'http://localhost:5173',
     credentials: true,
