@@ -20,6 +20,8 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
     console.log(err);
 });
 
+const __dirname = path.resolve();
+
 const app = express();
 
 // Set up CORS options
@@ -45,6 +47,12 @@ app.use('/api/groq', groqRouter);
 app.use('/api/content', contentRouter);
 
 app.use('/api/admin',adminRouter);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
