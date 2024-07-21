@@ -9,7 +9,7 @@
 - [Contact](#contact)
 
 ## Introduction
-**ContentGen** is a wesbite for all of AI in one place. you can generate content using different AI tools like Gemini and Groq.
+**ContentGen** is a web application for all of AI in one place. you can generate content using different AI tools like Gemini and Groq.
 
 ## Features
 - **Secure Authentication:** User registration and login via jwt  token
