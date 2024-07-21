@@ -99,8 +99,8 @@ export const deleteContent = async (req, res, next) => {
 export const getUsers = async (req, res, next) => {
     try {
         const users = await User.find();
-        const { password, ...others } = users._doc;
-        res.status(200).json({ success: true, users: others, message: 'Success' });
+        // const { password, ...others } = users._doc;
+        res.status(200).json({ success: true, users: users, message: 'Success' });
     } catch (error) {
         next(error);
     }
