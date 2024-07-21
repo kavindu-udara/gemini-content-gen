@@ -25,7 +25,7 @@ const __dirname = path.resolve();
 const app = express();
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'https://gemini-content-gen.onrender.com/',
     credentials: true,
 };
 
