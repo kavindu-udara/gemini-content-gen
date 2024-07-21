@@ -56,6 +56,22 @@ const Users = () => {
       });
   };
 
+  const deleteUser = () => {
+    apiClient.post(`/admin/user/delete/${selectedUser._id}`, {
+      id: currentUser._id,
+    }).then((res) => {
+      if (res.data.success) {
+        toast.success(res.data.message);
+        getUsers();
+        setDeleteConfirmModel(false);
+      } else {
+        toast.error(res.data.message);
+      }
+    }).catch((error) => {
+      toast.error(error.response.data.message);
+    });
+  }
+
   const handleDelete = (user) => {
     setSelectedUser(user);
     setDeleteConfirmModel(true);
@@ -157,7 +173,7 @@ const Users = () => {
             <div className="flex justify-center gap-4">
               <Button
                 color="failure"
-                // onClick={() => deleteContent(selectedContent._id)}
+                onClick={() => deleteUser()}
               >
                 {"Yes, I'm sure"}
               </Button>

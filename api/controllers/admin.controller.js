@@ -111,8 +111,6 @@ export const updateContent = async (req, res, next) => {
 
   export const editUser = async (req, res, next) => {
     const userId = req.params.userid;
-    console.log(req.body);
-    console.log(userId);
     const {username, email,role} = req.body;
     try {
         const updateUser = await User.findByIdAndUpdate(userId, {
@@ -126,6 +124,22 @@ export const updateContent = async (req, res, next) => {
             return res.status(404).json({ success: false, message: "User not found" });
         }else{
             res.status(200).json({ success: true, user: updateUser, message: 'User updated successfully' });
+        }
+    } catch (error) {
+        next(error);
+    }
+  }
+
+  export const deleteUser = async (req, res, next) => {
+    const id = req.params.userid;
+    console.log(id);
+    try {
+        const deleteUser =await User.findByIdAndDelete(id);
+        console.log(deleteUser);
+        if(!deleteUser) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }else{
+            res.status(200).json({ success: true, message: 'User deleted successfully' });
         }
     } catch (error) {
         next(error);
