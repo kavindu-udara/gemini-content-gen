@@ -36,7 +36,7 @@ const Dashboard = ({ DarkThemeToggle }) => {
       })
       .catch((err) => {
         toast.error(err.response.data.message);
-        navigate("/signin");
+        // navigate("/signin");
       });
   };
 
