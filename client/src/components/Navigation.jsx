@@ -11,10 +11,10 @@ import { useSelector } from "react-redux";
 const Navigation = ({ DarkThemeToggle, search, setSearch }) => {
   const { currentUser } = useSelector((state) => state.user);
   return (
-    <div className="flex md:fixed top-0 left-0 w-full h-full dark:bg-gray-800 dark:text-white">
-      <div className="w-24 md:block hidden flex flex-col justify-between text-center  dark:border-none px-5 bg-gray-50  dark:bg-gray-700 dark:text-white ">
+    <div className="sm:flex md:fixed top-0 left-0 w-full h-full dark:bg-gray-800 dark:text-white">
+      <div className="sm:w-24 w-full md:block flex flex-row sm:flex-col justify-between text-center dark:border-none px-5 bg-gray-50  dark:bg-gray-700 dark:text-white ">
         <div>
-          <div className="grid grid-cols-1 gap-5 mt-3 content-center items-center">
+          <div className="grid sm:grid-cols-1 grid-cols-5 gap-5 mt-3 content-center items-center">
             <NavButton icon={<IoIosHome />} path={"/dashboard/content"} />
             <NavButton icon={<FaBookmark />} path={"/dashboard/saved"} />
             <NavButton icon={<FaUser />} path={"/dashboard/profile"} />

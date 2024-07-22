@@ -67,7 +67,7 @@ const GenerateContent = ({ title, description, inputText, tools, id }) => {
             <Breadcrumb.Item href="#">{title}</Breadcrumb.Item>
           </Breadcrumb>
         </NavLink>
-        <div className="flex flex-col gap-10  mx-5 my-5">
+        <div className="flex flex-col gap-10  sm:mx-5 my-5">
           <div className="basis-1/3 rounded-xl border  p-2">
             <div className="rounded-xl bg-blue-100 dark:bg-gray-700 p-5">
               <button className="bg-white dark:text-black rounded-full mb-5 p-3 text-lg">

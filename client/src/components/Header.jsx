@@ -19,7 +19,7 @@ const Header = ({ DarkThemeToggle, search, setSearch }) => {
           </div>
         </Navbar.Brand>
 
-        <div className="flex md:order-2">
+        <div className="flex sm:order-2 mt-5 gap-5">
           <div className="text-3xl p-3 rounded-full bg-white dark:text-black cursor-pointer">
             <IoNotificationsOutline />
           </div>

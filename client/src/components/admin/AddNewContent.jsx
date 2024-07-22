@@ -62,9 +62,9 @@ const AddNewContent = () => {
       <div className=" bg-white dark:bg-gray-800 rounded-xl py-10 mb-10">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-10  mx-5 mt-5 mb-10"
+          className="flex flex-col gap-10 sm:mx-5 mt-5 mb-10"
         >
-          <div className="basis-1/3 rounded-xl border  p-2">
+          <div className="rounded-xl border  p-2">
             <div className="rounded-xl bg-blue-100 dark:bg-gray-700 p-5">
               <button
                 disabled
