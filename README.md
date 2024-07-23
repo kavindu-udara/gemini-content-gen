@@ -40,7 +40,9 @@
    ```sh
    cd api
    npm run dev
-   cd ../
+   ```
+
+   ```
    cd client
    npm run dev
    ```
