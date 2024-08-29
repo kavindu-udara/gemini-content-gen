@@ -53,4 +53,4 @@ Contributions are welcome! Please fork the repository and create a pull request 
 ## Contact
 For any questions or suggestions, feel free to reach out:
 - **GitHub:** [kavindu-udara](https://github.com/kavindu-udara)
-- **Email:** [Your Email](mailto:udarakavindu99@gmail.com)
+- **Email:** [Send mail](mailto:udarakavindu99@gmail.com)
