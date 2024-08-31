@@ -18,6 +18,7 @@
 ## Technologies Used
 - **Backend:** Node.js with Express.js
 - **Frontend:** React.js
+- **Database and Storage:** MongoDB and FireBase
 
 ## Installation
 1. **Clone the repository:**
